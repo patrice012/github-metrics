@@ -1,4 +1,4 @@
-import { HomeInterface } from "./Home/homeUI"
+import { HomeInterface } from "./Home/homePage"
 
 
 export default function Home() {

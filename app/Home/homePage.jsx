@@ -1,5 +1,6 @@
 import style from './_home.scss';
 
+
 export const HomeInterface = () => {
     return (
         <>
