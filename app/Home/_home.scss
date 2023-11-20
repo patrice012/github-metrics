@@ -20,7 +20,6 @@
         margin-block: auto;
 
         @include g.for-desktop-up {
-            // border: 2px solid green;
             max-width: 62.5rem;
         }
     }
@@ -29,15 +28,18 @@
         font-size: 3.5rem;
         font-weight: 700;
         text-align: center;
-        color: var(--white, #fff);
+        color: var(--blue-900, #0D0E19);
         padding-top: 6rem;
+
+    
     }
 
     & .search--container {
         width: 100%;
-        // border: none;
+        border: 2px solid var(--placeholder-color, #898989);
         margin-inline: auto;
         position: relative;
+        border-radius: 1.5rem;
 
         & .text--input {
             border-radius: 1.5rem;
@@ -45,6 +47,7 @@
             height: 4.5rem;
             padding-block: 0.5rem;
             padding-inline-start: 2rem;
+            padding-inline-end: calc(14% + 2.6rem);
             padding-block-end: 0.8rem;
 
             font-size: 1.23rem;
@@ -56,6 +59,7 @@
         }
 
         & .btn {
+            width: 14%;
             border-radius: 1rem;
             position: absolute;
             right: 2%;
