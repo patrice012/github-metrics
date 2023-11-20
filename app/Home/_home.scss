@@ -1,12 +1,70 @@
-
+@use '../../styles/global' as g;
 
 .homePage {
-    // width: 100%;
-    // height: 100vw;
-    background-color: white;
-}
+    width: 100%;
+    height: max-content;
+    // background-color: white;
+    align-self: center;
 
-.container {
-    border: 3px solid red;
-    margin-inline: auto;
+    & .block--contents {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        margin-inline: auto;
+        margin-block: auto;
+
+        @include g.for-desktop-up{
+            border: 2px solid green;
+            max-width: 62.5rem;
+        }
+    }
+
+    & h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        text-align: center;
+        color: var(--white, #fff);
+    }
+
+    & .search--container {
+        width: 100%;
+        // border: none;
+        margin-inline: auto;
+        position: relative;
+        
+        & .text--input {
+            border-radius: 1.5rem;
+            width: 100%;
+            height: 4.5rem;
+            padding-block: .5rem;
+            padding-inline-start: 2rem;
+            padding-block-end: .8rem;
+
+            font-size: 1.23rem;
+            font-weight: 700;
+            
+
+            &::placeholder{
+                color: var(--placeholder-color,#898989);
+            }
+        }
+
+        & .btn {
+            border-radius: 1rem;
+            position: absolute;
+            right: 2%;
+            top: 15%;
+            font-size: 1.4rem;
+            font-weight: 700;
+            height: 70%;
+            padding-inline: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+
 }

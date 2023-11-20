@@ -7,13 +7,13 @@ export const HomeInterface = () => {
                 <div className="container">
                     <div className="block--contents">
                         <h1>Let&apos;s look at someone metrics...</h1>
-                        <form>
+                        <form className='search--container'>
                             <input
                                 type="text"
                                 placeholder="Let's look at someone metrics...Type the name here."
                                 className="text--input"
                             />
-                            <button className="btn">Search</button>
+                            <button className="btn submit-btn">Search</button>
                         </form>
                     </div>
                 </div>

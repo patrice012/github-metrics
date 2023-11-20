@@ -1,7 +1,13 @@
-import { Inter } from 'next/font/google'
+import { Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
+import { Footer } from '@/components/footer/Footer'
+import { Navbar } from '@/components/navbar/Navbard'
+
+import style from '../styles/index.css'
 
 const inter = Inter({ subsets: ['latin'] })
+
+const space = Space_Grotesk({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Github Metrics',
@@ -11,7 +17,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>
+        <Navbar/>
+        {children}
+        <Footer/>
+      </body>
     </html>
   )
 }
