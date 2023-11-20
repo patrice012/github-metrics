@@ -1,22 +1,26 @@
-@use '../../styles/global' as g;
+@use "../../styles/global" as g;
 
 .homePage {
     width: 100%;
-    height: max-content;
-    // background-color: white;
+    height: calc(100vh - var(--navbar-height) - var(--footer-height));
     align-self: center;
 
+    & .container {
+        height: 100%;
+    }
+
     & .block--contents {
+        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        gap: 3rem;
+        gap: 5rem;
         margin-inline: auto;
         margin-block: auto;
 
-        @include g.for-desktop-up{
-            border: 2px solid green;
+        @include g.for-desktop-up {
+            // border: 2px solid green;
             max-width: 62.5rem;
         }
     }
@@ -26,6 +30,7 @@
         font-weight: 700;
         text-align: center;
         color: var(--white, #fff);
+        padding-top: 6rem;
     }
 
     & .search--container {
@@ -33,21 +38,20 @@
         // border: none;
         margin-inline: auto;
         position: relative;
-        
+
         & .text--input {
             border-radius: 1.5rem;
             width: 100%;
             height: 4.5rem;
-            padding-block: .5rem;
+            padding-block: 0.5rem;
             padding-inline-start: 2rem;
-            padding-block-end: .8rem;
+            padding-block-end: 0.8rem;
 
             font-size: 1.23rem;
             font-weight: 700;
-            
 
-            &::placeholder{
-                color: var(--placeholder-color,#898989);
+            &::placeholder {
+                color: var(--placeholder-color, #898989);
             }
         }
 
@@ -65,6 +69,4 @@
             justify-content: center;
         }
     }
-
-
 }
