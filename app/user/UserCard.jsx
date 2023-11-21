@@ -1,7 +1,7 @@
 export const UserCard = () => {
     return (
         <div className="user--card">
-            <div></div>
+            <div className="card--container"></div>
         </div>
     )
 }
