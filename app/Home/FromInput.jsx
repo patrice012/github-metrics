@@ -1,27 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { baseUrl } from "../api-endpoint";
+import { UserContext } from "@/context/userContext";
 
 export const FormInput = () => {
-    const [user, setUser] = useState(null);
+    const { addUser } = useContext(UserContext);
     const [input, setInput] = useState(undefined);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        (async () => {
-            try {
-                const res = await getUser(input);
-                setUser(res);
-            } catch (error) {
-                // handle error
-                console.error(error);
-            } finally {
-                setLoading(false)
-            }
-        })();
+        getUser(input)
+            .then((res) => {
+                addUser(res);
+            })
+            .catch((error) => console.log(error))
+            .finally(() => {
+                setInput("");
+                setLoading(false);
+            });
     };
 
     const handleChange = (inputValue) => {
@@ -36,18 +35,24 @@ export const FormInput = () => {
                 placeholder="Let's look at someone metrics...Type the name here."
                 className="text--input"
             />
-            <button disabled={loading} className="btn submit-btn">
-                Submit
-            </button>
+            <button className="btn submit-btn">Submit</button>
         </form>
     );
 };
 
-async function getUser(username) {
+function getUser(username) {
     const url = `${baseUrl}/users/${username}`;
-    const res = await fetch(url);
-    if (!res.ok) {
-        throw new Error("Failed to fetch data.");
-    }
-    return res.json();
+    return (
+        fetch(url)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch data.");
+                }
+                return res.json();
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error);
+            })
+    );
 }
