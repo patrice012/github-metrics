@@ -3,10 +3,11 @@ import './globals.css'
 import { Footer } from '@/components/footer/Footer'
 import { Navbar } from '@/components/navbar/Navbard'
 
+import { UserProvider } from '@/context/userContext'
+
 import style from '../styles/index.css'
 
 const inter = Inter({ subsets: ['latin'] })
-
 const space = Space_Grotesk({ subsets: ['latin'] })
 
 export const metadata = {
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar/>
-        {children}
-        <Footer/>
+        <Navbar />
+        <UserProvider>
+          {children}
+        </UserProvider>
+        <Footer />
       </body>
     </html>
   )
