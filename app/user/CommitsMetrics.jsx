@@ -1,15 +1,11 @@
 import Plot from "react-plotly.js";
-import style from './_partials/_result.scss'
+import style from "./_partials/_result.scss";
 import { baseUrl } from "../api-endpoint";
 
-
-
 export const CommitsMetrics = ({ userData }) => {
-    const userName = userData["login"];
-    const commitsUrl = `${baseUrl}/${userName}/commits?since=2022-11-09&until=2023-11-09`;
-    const commitsUrlsss = `${baseUrl}/${userName}/commits`;
-    console.log(commitsUrl)
-    console.log(commitsUrlsss)
+    // const userName = userData["login"];
+       
+
     const data = [
         {
             x: [1, 2, 3],
@@ -41,3 +37,13 @@ export const CommitsMetrics = ({ userData }) => {
         />
     );
 };
+
+async function getCommits(username) {
+    const url = `https://api.github.com/users/${username}/commits?since=2022-11-09&until=2023-11-09`;
+    // const url = `${baseUrl}/users/${username}/commits`;
+    const res = await fetch(url);
+    if (!res.ok) {
+        throw new Error(`Failed to fetch ${username} commits.`);
+    }
+    return res.json();
+}

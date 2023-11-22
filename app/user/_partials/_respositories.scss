@@ -1,0 +1,9 @@
+.listOfRespositories {
+    & > .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        align-items: center;
+        column-gap: 3rem;
+        row-gap: 3.5rem;
+    }
+}
