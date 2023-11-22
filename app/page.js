@@ -3,6 +3,7 @@
 import { useContext } from "react"
 import { HomeInterface } from "./Home/HomePage"
 import { UserContext } from "@/context/userContext"
+import { CommitsMetrics } from "./user/CommitsMetrics"
 
 
 export default function Home() {
@@ -10,7 +11,9 @@ export default function Home() {
   return (
     <>
       <HomeInterface>
-        <h1>hello</h1>
+        {user &&
+          <CommitsMetrics userData={user} />
+        }
       </HomeInterface>
     </>
   )

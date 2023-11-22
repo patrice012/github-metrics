@@ -1,12 +1,19 @@
-.search--container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
-    width: 77%;
-    padding-block: 6rem;
-    margin-inline: auto;
+// ploty reset
+.modebar {
+    display: flex;
+    align-items: center;
 
-    & > * {
-        justify-self: center;
+    & * {
+        display: flex;
+        align-items: center;
+    }
+}
+.modebar-group {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    &:last-of-type {
+        display: none !important;
     }
 }
