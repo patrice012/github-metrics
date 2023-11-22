@@ -2,8 +2,10 @@
 
 .homePage {
     width: 100%;
-    height: calc(100vh - var(--navbar-height) - var(--footer-height));
+    // height: calc(100vh - var(--navbar-height) - var(--footer-height));
     align-self: center;
+    padding-block-start: 3rem;
+    padding-block-end: 4rem;
 
     & .container {
         height: 100%;
@@ -15,7 +17,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        gap: 5rem;
+        gap: 3rem;
         margin-inline: auto;
         margin-block: auto;
 
@@ -29,7 +31,7 @@
         font-weight: 700;
         text-align: center;
         color: var(--blue-900, #0D0E19);
-        padding-top: 6rem;
+        // padding-top: 6rem;
 
     
     }

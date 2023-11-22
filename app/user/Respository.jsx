@@ -5,9 +5,9 @@ export const Respository = () => {
     return (
         <div className="repository--container">
             <div className="fields--container">
-                <div className="repository--username">test</div>
-                <div className="repository--email">patrice@gmail.com</div>
-                <div className="repository--create-at">helloekeekke</div>
+                <h2 className="repository--username">test</h2>
+                <h3 className="repository--email">patrice@gmail.com</h3>
+                <h4 className="repository--create-at">helloekeekke</h4>
             </div>
             <div className="repository--readme">
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea
