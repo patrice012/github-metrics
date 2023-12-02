@@ -1,41 +1,55 @@
 import Image from "next/image";
 import Link from "next/link";
-import avatar  from "../../public/avatar.png";
+import avatar from "../../public/avatar.png";
 
-export const AccountDetail = () => {
+export const AccountDetail = ({ userData }) => {
+    console.log(userData, "userData");
     return (
-        <section className="account-detail">
-            <div className="container">
-                <div className="main-information">
-                    <Image src={avatar} alt="profil picture" />
-                    <h1 className="name">Jonh doe</h1>
-                    <Link href="mailto:ex@gmail.com">ex@gmail.com</Link>
-                </div>
-                <div className="profile">
-                    <h4 className="followers">
-                        <span>Followings:</span> <span>45</span>
-                    </h4>
-                    <h4 className="following">
-                        <span>Followers:</span> <span>95</span>
-                    </h4>
-                    <h4 className="join-at">
-                        <span>Join at:</span> <span>12-02-2001</span>
-                    </h4>
-                    <h4 className="status">
-                        <span>status:</span> <span>happy</span>
-                    </h4>
-                </div>
-                <div className="bio">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Explicabo vitae suscipit eos ipsum minus, veniam quibusdam
-                    ullam tenetur ducimus! Cupiditate aliquam unde non quisquam
-                    vero sit maiores natus, atque eveniet! Magnam neque eligendi
-                    deserunt reiciendis hic laboriosam enim similique
-                    perspiciatis repudiandae, ad aut nihil consequatur nam, vero
-                    sapiente dicta aspernatur asperiores? Sint quasi vero eaque
-                    neque voluptatum rerum! Eos, saepe!
-                </div>
-            </div>
-        </section>
+        <>
+            {userData ? (
+                <section className="account-detail">
+                    <div className="container">
+                        <div className="main-information">
+                            <img
+                                src={userData.avatar_url}
+                                alt="profil picture"
+                            />
+                            <h1 className="name">Username: {userData.name}</h1>
+                            <h3 className="name">
+                                Login Name: {userData.login}
+                            </h3>
+                            <Link href="mailto:ex@gmail.com">
+                                {userData.email}
+                            </Link>
+                        </div>
+                        <div className="profile">
+                            <h4 className="followers">
+                                <span>Followings:</span>{" "}
+                                <span>{userData.following}</span>
+                                <Link href={userData.following_url}>
+                                    View Followings
+                                </Link>
+                            </h4>
+                            <h4 className="following">
+                                <span>Followers:</span>{" "}
+                                <span>{userData.followers}</span>
+                                <Link href={userData.followers_url}>
+                                    View Followers
+                                </Link>
+                            </h4>
+                            <h4 className="join-at">
+                                <span>Join at:</span>{" "}
+                                <span>{userData.created_at}</span>
+                            </h4>
+                            <h4 className="status">
+                                <span>Public repository:</span>{" "}
+                                <span>{userData.public_repos}</span>
+                            </h4>
+                        </div>
+                        <div className="bio">{userData.bio}</div>
+                    </div>
+                </section>
+            ) : null}
+        </>
     );
 };

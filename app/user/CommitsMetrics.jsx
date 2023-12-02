@@ -1,4 +1,4 @@
-import Plot from "react-plotly.js";
+// import Plot from "react-plotly.js";
 import style from "./_partials/_result.scss";
 import { baseUrl } from "../api-endpoint";
 
@@ -30,11 +30,9 @@ export const CommitsMetrics = ({ userData }) => {
         ],
     };
     return (
-        <Plot
-            data={data}
-            layout={{ width: 520, height: 520, title: "A Fancy Plot" }}
-            config={config}
-        />
+        <>
+        <h2>Hello</h2>
+        </>
     );
 };
 
