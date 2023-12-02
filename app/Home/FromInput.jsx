@@ -5,17 +5,6 @@ import { baseUrl } from "../api-endpoint";
 import { UserContext } from "@/context/userContext";
 import { fetchData } from "@/utils/fetch";
 
-// fetc user information
-async function getProfileInformation(user) {
-    const url = `${baseUrl}/users/${user}`;
-    try {
-        const res = await fetchData(url);
-        return res;
-    } catch (error) {
-        return console.log(error);
-    }
-}
-
 export const FormInput = () => {
     const { addUser } = useContext(UserContext);
 
@@ -47,3 +36,14 @@ export const FormInput = () => {
         </form>
     );
 };
+
+// fetc user information
+async function getProfileInformation(user) {
+    const url = `${baseUrl}/users/${user}`;
+    try {
+        const res = await fetchData(url);
+        return res;
+    } catch (error) {
+        return console.log(error);
+    }
+}

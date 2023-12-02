@@ -1,6 +1,4 @@
-import Image from "next/image";
 import Link from "next/link";
-import avatar from "../../public/avatar.png";
 
 export const AccountDetail = ({ userData }) => {
     console.log(userData, "userData");
