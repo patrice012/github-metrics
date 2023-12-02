@@ -3,56 +3,47 @@
 import { useContext, useState } from "react";
 import { baseUrl } from "../api-endpoint";
 import { UserContext } from "@/context/userContext";
+import { fetchData } from "@/utils/fetch";
+
+// fetc user information
+async function getProfileInformation(user) {
+    const url = `${baseUrl}/users/${user}`;
+    try {
+        const res = await fetchData(url);
+        return res;
+    } catch (error) {
+        return console.log(error);
+    }
+}
 
 export const FormInput = () => {
     const { addUser } = useContext(UserContext);
-    const [input, setInput] = useState(undefined);
-    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = (e) => {
+    // fetch user information
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        getUser(input)
-            .then((res) => {
-                addUser(res);
-            })
-            .catch((error) => console.log(error))
-            .finally(() => {
-                setInput("");
-                setLoading(false);
-            });
-    };
+        // setLoading(true);
+        const formData = new FormData(e.target);
 
-    const handleChange = (inputValue) => {
-        setInput(inputValue);
+        // profile information
+        const info = await getProfileInformation(formData.get("username"));
+        addUser(info);
+
+        //reset input state
+        if (info) {
+            e.target.reset();
+        }
     };
 
     return (
         <form onSubmit={handleSubmit} className="search--container">
             <input
-                onChange={(e) => handleChange(e.target.value)}
                 type="text"
                 placeholder="Let's look at someone metrics...Type the name here."
                 className="text--input"
+                name="username"
             />
             <button className="btn submit-btn">Submit</button>
         </form>
     );
 };
-
-function getUser(username) {
-    const url = `${baseUrl}/users/${username}`;
-    return (
-        fetch(url)
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error("Failed to fetch data.");
-                }
-                return res.json();
-            })
-            .catch((error) => {
-                // handle error
-                console.log(error);
-            })
-    );
-}
