@@ -11,7 +11,8 @@ export const Respository = ({ repos }) => {
     // console.log(repos)
     useEffect(() => {
         const commitsUrl = `${baseUrl}/repos/${repos.login}/${repos.name}/commits/`;
-        const d = fetchData(commitsUrl);
+        const res = fetchData(commitsUrl);
+        
         console.log(d, "commits");
     }, [repos]);
 
