@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { baseUrl } from "../api-endpoint";
+import { baseUrl } from "../../utils/api-endpoint";
 import { UserContext } from "@/context/userContext";
 import { fetchData } from "@/utils/fetch";
 
