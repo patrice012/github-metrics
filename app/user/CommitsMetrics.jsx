@@ -2,8 +2,13 @@
 import style from "./_partials/_result.scss";
 import { baseUrl } from "../../utils/api-endpoint";
 
-export const CommitsMetrics = ({ userData }) => {
+export const CommitsMetrics = ({ user }) => {
     // const userName = userData["login"];
+
+    console.log(
+        user.getTotalNumberOfCommitsInAllRespositories(),
+        "total commits"
+    );
 
     const data = [
         {

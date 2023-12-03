@@ -4,16 +4,13 @@ import { useEffect } from "react";
 import { fetchData } from "@/utils/fetch";
 import { baseUrl } from "../../utils/api-endpoint";
 
-//commits_url
-//https://api.github.com/repos/{lenon==> user-login}/{vimfiles==> name}/commits ==> repos all commits
-
-export const Respository = ({ repos }) => {
-    // console.log(repos)
+export const Respository = ({ repos, setCommits }) => {
     useEffect(() => {
-        const commitsUrl = `${baseUrl}/repos/${repos.login}/${repos.name}/commits/`;
-        const res = fetchData(commitsUrl);
-        
-        console.log(d, "commits");
+        const commitsUrl = `${baseUrl}/repos/${repos.owner.login}/${repos.name}/commits`;
+        (async () => {
+            const res = await fetchData(commitsUrl);
+            setCommits((prev) => ({ ...prev, [repos.name]: res }));
+        })();
     }, [repos]);
 
     return (
