@@ -1,9 +1,10 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { baseUrl } from "../../utils/api-endpoint";
 import { UserContext } from "@/context/userContext";
 import { fetchData } from "@/utils/fetch";
+import { UserMetrics } from "@/helpers/userGlobalMetrics";
 
 export const FormInput = () => {
     const { addUser } = useContext(UserContext);
@@ -16,7 +17,10 @@ export const FormInput = () => {
 
         // profile information
         const info = await getProfileInformation(formData.get("username"));
-        addUser(info);
+        // create user ==> use the login instead of name
+        const user = new UserMetrics(info.login);
+        user.globalData = info;
+        addUser(user);
 
         //reset input state
         if (info) {
