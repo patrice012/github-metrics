@@ -6,17 +6,21 @@ import { UserContext } from "@/context/userContext";
 import { CommitsMetrics } from "./user/CommitsMetrics";
 import { UserRespositories } from "./user/UserRepository";
 import { AccountDetail } from "./user/AccountDetail";
-import { RepositoriesProvider } from "@/context/repositoriesContext";
+// import { RepositoriesProvider } from "@/context/repositoriesContext";
 export default function Home() {
     const { user } = useContext(UserContext);
+    const userData = user?.globalData;
+
+    
+
     return (
         <>
             <HomeInterface>
-                <AccountDetail userData={user} />
+                {user && <AccountDetail userData={userData} />}
                 {/* <RepositoriesProvider> */}
-                    <UserRespositories userData={user} />
+                {user && <UserRespositories userData={userData} />}
                 {/* </RepositoriesProvider> */}
-                <CommitsMetrics userData={user} />
+                {user && <CommitsMetrics user={user} />}
             </HomeInterface>
         </>
     );

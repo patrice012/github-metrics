@@ -101,56 +101,62 @@ class UserMetrics {
             return "Not error found.";
         }
     }
+
+    // author commits
+    // #allCommitsInRespositories = [];
+    #commitPerRepository = [];
+    #totalNumberOfCommits = 0;
+    #allCommits = undefined;
+
+    // get all commits in single repository
+    // getUserCommitsInRespository() {
+    //     const data = [...this.#allCommits];
+    //     const userCommits = data?.map((_, index) => {
+    //         if (data[index]?.author?.login === this.name) {
+    //             return data[index].commit;
+    //         }
+    //     });
+    //     console.log(userCommits, "userCommits");
+    //     this.#totalNumberOfCommits = userCommits.length;
+    //     return userCommits;
+    // }
+
+    // getCommitsInSingleRepository(reposName, commits) {
+    //     console.log(commits, "commist in File", reposName);
+    //     const reposCommist = this.getCommitsInSingleRepository(commits);
+    //     this.#commitPerRepository.push({
+    //         [reposName]: reposCommist.length,
+    //     });
+    //     return reposCommist;
+    // }
+
+    // getTotalNumberOfCommitsInAllRespositories() {
+    //     return this.#totalNumberOfCommits;
+    // }
+
+    // getCommitsNumberPerRespository() {
+    //     return this.#commitPerRepository;
+    // }
+
+    filterCommitsBaseOnUserName(data) {
+        const filterData = {};
+        for (const [key, value] of Object.entries(data)) {
+            const userCommits = value?.filter((_, index) => {
+                if (value[index]?.author?.login === this.name)
+                    return value[index].commit;
+            });
+            if (userCommits.length > 0) filterData[key] = userCommits;
+        }
+        return filterData;
+    }
+
+    saveAllCommits(data) {
+        this.#allCommits = { ...data };
+    }
+
+    getAllCommits() {
+        return this.filterCommitsBaseOnUserName(this.#allCommits);
+    }
 }
 
 export { UserMetrics };
-
-// const data = {
-//     login: "patrice012",
-//     id: 73082094,
-//     node_id: "MDQ6VXNlcjczMDgyMDk0",
-//     avatar_url: "https://avatars.githubusercontent.com/u/73082094?v=4",
-//     gravatar_id: "",
-//     url: "https://api.github.com/users/patrice012",
-//     html_url: "https://github.com/patrice012",
-//     followers_url: "https://api.github.com/users/patrice012/followers",
-//     following_url:
-//         "https://api.github.com/users/patrice012/following{/other_user}",
-//     gists_url: "https://api.github.com/users/patrice012/gists{/gist_id}",
-//     starred_url:
-//         "https://api.github.com/users/patrice012/starred{/owner}{/repo}",
-//     subscriptions_url: "https://api.github.com/users/patrice012/subscriptions",
-//     organizations_url: "https://api.github.com/users/patrice012/orgs",
-//     repos_url: "https://api.github.com/users/patrice012/repos",
-//     events_url: "https://api.github.com/users/patrice012/events{/privacy}",
-//     received_events_url:
-//         "https://api.github.com/users/patrice012/received_events",
-//     type: "User",
-//     site_admin: false,
-//     name: "patrice_dev",
-//     company: null,
-//     blog: "",
-//     location: null,
-//     email: "patricedev02@gmail.com",
-//     hireable: null,
-//     bio: null,
-//     twitter_username: null,
-//     public_repos: 48,
-//     public_gists: 1,
-//     followers: 9,
-//     following: 32,
-//     created_at: "2020-10-18T21:55:50Z",
-//     updated_at: "2023-12-02T14:20:11Z",
-//     private_gists: 0,
-//     total_private_repos: 0,
-//     owned_private_repos: 0,
-//     disk_usage: 123607,
-//     collaborators: 0,
-//     two_factor_authentication: false,
-//     plan: {
-//         name: "pro",
-//         space: 976562499,
-//         collaborators: 0,
-//         private_repos: 9999,
-//     },
-// };
