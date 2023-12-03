@@ -1,4 +1,4 @@
-import { baseUrl } from "../api-endpoint";
+import { baseUrl } from "../../utils/api-endpoint";
 import { Respository } from "./Respository";
 import { fetchData } from "@/utils/fetch";
 import style from "./_partials/_respositories.scss";
@@ -8,11 +8,9 @@ export const UserRespositories = ({ userData }) => {
     const [repositories, setRepositories] = useState([]);
 
     useEffect(() => {
-        console.log("inside effect");
         if (!userData) {
             return;
         }
-
         (async () => {
             const repos = await getUserRespositories(userData.login);
             setRepositories(repos);

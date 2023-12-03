@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 export const AccountDetail = ({ userData }) => {
-    console.log(userData, "userData");
     return (
         <>
             {userData ? (
@@ -16,7 +15,10 @@ export const AccountDetail = ({ userData }) => {
                             <h3 className="name">
                                 Login Name: {userData.login}
                             </h3>
-                            <Link href="mailto:ex@gmail.com">
+                            <h4 className="location">
+                                Login Name: {userData.location}
+                            </h4>
+                            <Link href={`mailto:${userData.email}`}>
                                 {userData.email}
                             </Link>
                         </div>
@@ -39,9 +41,13 @@ export const AccountDetail = ({ userData }) => {
                                 <span>Join at:</span>{" "}
                                 <span>{userData.created_at}</span>
                             </h4>
-                            <h4 className="status">
+                            <h4 className="repos">
                                 <span>Public repository:</span>{" "}
                                 <span>{userData.public_repos}</span>
+                            </h4>
+                            <h4 className="gists">
+                                <span>Public gists:</span>{" "}
+                                <span>{userData.public_gists}</span>
                             </h4>
                         </div>
                         <div className="bio">{userData.bio}</div>

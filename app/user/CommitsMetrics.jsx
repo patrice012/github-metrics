@@ -1,10 +1,9 @@
 // import Plot from "react-plotly.js";
 import style from "./_partials/_result.scss";
-import { baseUrl } from "../api-endpoint";
+import { baseUrl } from "../../utils/api-endpoint";
 
 export const CommitsMetrics = ({ userData }) => {
     // const userName = userData["login"];
-       
 
     const data = [
         {
@@ -31,7 +30,7 @@ export const CommitsMetrics = ({ userData }) => {
     };
     return (
         <>
-        <h2>Hello</h2>
+            <h2>Hello</h2>
         </>
     );
 };
