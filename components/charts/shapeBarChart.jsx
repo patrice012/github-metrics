@@ -6,56 +6,15 @@ import {
     Cell,
     XAxis,
     YAxis,
+    Tooltip,
+    Legend,
     CartesianGrid,
     ResponsiveContainer,
 } from "recharts";
 
-const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
+// const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
+const colors = ["#8884d8", "#82ca9d", "#19d"];
 
-const data = [
-    {
-        name: "Page A",
-        uv: 4000,
-        // pv: 00,
-        amt: 2400,
-    },
-    {
-        name: "Page B",
-        uv: 3000,
-        // pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: "Page C",
-        uv: 2000,
-        // pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: "Page D",
-        uv: 2780,
-        // pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: "Page E",
-        uv: 1890,
-        // pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: "Page F",
-        uv: 2390,
-        // pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: "Page G",
-        uv: 3490,
-        // pv: 4300,
-        amt: 2100,
-    },
-];
 
 const getPath = (x, y, width, height) => {
     return `M${x},${y + height}C${x + width / 3},${y + height} ${
@@ -69,19 +28,28 @@ const getPath = (x, y, width, height) => {
 };
 
 const TriangleBar = (props) => {
+    console.log(props)
     const { fill, x, y, width, height } = props;
 
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
 
-export function ShapeBarChart() {
+export function ShapeBarChart({ user }) {
+    const maxNumber = 6;
+    const commits = user.allCommits?.slice(0, maxNumber)?.map((value, _) => {
+        return {
+            name: Object.keys(value)[0],
+            value: Object.values(value)[0],
+        };
+    });
+
     return (
         <>
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart
                     width={500}
                     height={300}
-                    data={data}
+                    data={commits}
                     margin={{
                         top: 20,
                         right: 30,
@@ -92,17 +60,27 @@ export function ShapeBarChart() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
+                    <Tooltip />
+                    <Legend />
 
                     <Bar
-                        dataKey="uv"
+                        dataKey="value"
                         fill="#8884d8"
-                        shape={<TriangleBar />}
+                        // shape={<TriangleBar />}
                         label={{ position: "top" }}
                     >
-                        {data.map((entry, index) => (
+                        {commits.map((entry, index) => (
                             <Cell
                                 key={`cell-${index}`}
-                                fill={colors[index % 20]}
+                                fill={colors[index % colors.length]}
+                                // fill={
+                                //     colors[
+                                //         Math.floor(
+                                //             Math.random() *
+                                //                 (colors.length - 0 + 1)
+                                //         ) + 0
+                                //     ]
+                                // }
                             />
                         ))}
                     </Bar>

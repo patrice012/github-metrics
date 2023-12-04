@@ -57,7 +57,7 @@ const data = [
     },
 ];
 
-export function BarChartPlot() {
+export function BarChartPlot({user}) {
 
         return (
             <ResponsiveContainer width="100%" height="100%">

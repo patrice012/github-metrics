@@ -36,7 +36,7 @@ export const UserRespositories = ({ userData }) => {
     return (
         <>
             <section className="listOfRespositories">
-                {/* <div className="container">
+                <div className="container">
                     {repositories?.map((repos, index) => (
                         <Respository
                             key={index}
@@ -44,7 +44,7 @@ export const UserRespositories = ({ userData }) => {
                             setContributions={setContributions}
                         />
                     ))}
-                </div> */}
+                </div>
             </section>
             {/* {user.totalNumberOfCommits && <MetricsChart user={user} />} */}
 
