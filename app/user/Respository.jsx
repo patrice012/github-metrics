@@ -1,15 +1,15 @@
 import Link from "next/link";
 import styel from "./_partials/_repository.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchData } from "@/utils/fetch";
 import { baseUrl } from "../../utils/api-endpoint";
 
-export const Respository = ({ repos, setCommits }) => {
+export const Respository = ({ repos, setContributions }) => {
     useEffect(() => {
-        const commitsUrl = `${baseUrl}/repos/${repos.owner.login}/${repos.name}/commits`;
+        const contributionsURL = `${baseUrl}/repos/${repos.owner.login}/${repos.name}/contributors`;
         (async () => {
-            const res = await fetchData(commitsUrl);
-            setCommits((prev) => ({ ...prev, [repos.name]: res }));
+            const res = await fetchData(contributionsURL);
+            setContributions((prev) => ({ ...prev, [repos.name]: res }));
         })();
     }, [repos]);
 

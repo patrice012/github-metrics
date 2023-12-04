@@ -5,10 +5,10 @@ import { baseUrl } from "../../utils/api-endpoint";
 export const CommitsMetrics = ({ user }) => {
     // const userName = userData["login"];
 
-    console.log(
-        user.getTotalNumberOfCommitsInAllRespositories(),
-        "total commits"
-    );
+    // console.log(
+    //     user.getTotalNumberOfCommitsInAllRespositories(),
+    //     "total commits"
+    // );
 
     const data = [
         {

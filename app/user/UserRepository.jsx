@@ -6,13 +6,10 @@ import { useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
 
-
-
 export const UserRespositories = ({ userData }) => {
     const [repositories, setRepositories] = useState([]);
-    const [commits, setCommits] = useState({});
+    const [contributions, setContributions] = useState({});
     const { user } = useContext(UserContext);
-
 
     useEffect(() => {
         if (!userData) {
@@ -24,9 +21,17 @@ export const UserRespositories = ({ userData }) => {
         })();
     }, [userData]);
 
-    if (commits) {
-        user.saveAllCommits(commits);
+    if (contributions) {
+        user.saveAllContributions(contributions);
     }
+
+    if (repositories) {
+        user.setAllRespositories(repositories);
+    }
+
+    // console.log(user.getAllCommits(), "all contributions");
+
+    // console.log(user.getTotalNumberOfCommits(), "getTotalNumberOfCommits");
 
     return (
         <>
@@ -36,7 +41,7 @@ export const UserRespositories = ({ userData }) => {
                         <Respository
                             key={index}
                             repos={repos}
-                            setCommits={setCommits}
+                            setContributions={setContributions}
                         />
                     ))}
                 </div>

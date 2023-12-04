@@ -103,60 +103,204 @@ class UserMetrics {
     }
 
     // author commits
-    // #allCommitsInRespositories = [];
     #commitPerRepository = [];
     #totalNumberOfCommits = 0;
-    #allCommits = undefined;
+    #allContributions = [];
+    #commitsRepos = [];
 
-    // get all commits in single repository
-    // getUserCommitsInRespository() {
-    //     const data = [...this.#allCommits];
-    //     const userCommits = data?.map((_, index) => {
-    //         if (data[index]?.author?.login === this.name) {
-    //             return data[index].commit;
-    //         }
-    //     });
-    //     console.log(userCommits, "userCommits");
-    //     this.#totalNumberOfCommits = userCommits.length;
-    //     return userCommits;
-    // }
-
-    // getCommitsInSingleRepository(reposName, commits) {
-    //     console.log(commits, "commist in File", reposName);
-    //     const reposCommist = this.getCommitsInSingleRepository(commits);
-    //     this.#commitPerRepository.push({
-    //         [reposName]: reposCommist.length,
-    //     });
-    //     return reposCommist;
-    // }
-
-    // getTotalNumberOfCommitsInAllRespositories() {
-    //     return this.#totalNumberOfCommits;
-    // }
-
-    // getCommitsNumberPerRespository() {
-    //     return this.#commitPerRepository;
-    // }
-
-    filterCommitsBaseOnUserName(data) {
-        const filterData = {};
-        for (const [key, value] of Object.entries(data)) {
-            const userCommits = value?.filter((_, index) => {
-                if (value[index]?.author?.login === this.name)
-                    return value[index].commit;
-            });
-            if (userCommits.length > 0) filterData[key] = userCommits;
+    saveUserCommits(repos, contributions) {
+        if (!this.#commitsRepos.includes(repos)) {
+            this.#commitPerRepository = [
+                ...this.#commitPerRepository,
+                {
+                    [repos]: contributions,
+                },
+            ];
+            this.#commitsRepos.push(repos);
         }
-        return filterData;
     }
 
-    saveAllCommits(data) {
-        this.#allCommits = { ...data };
+    getTotalNumberOfCommits() {
+        const initialValue = 0;
+        this.#totalNumberOfCommits = this.#commitPerRepository.reduce(
+            (accumulator, obj) => accumulator + Object.values(obj)[0],
+            initialValue
+        );
+
+        return this.#totalNumberOfCommits;
+    }
+
+    filterCommitsBaseOnUserName(data) {
+        for (const [key, value] of Object.entries(data)) {
+            const userCommits = value?.filter((_, index) => {
+                if (value[index]?.login === this.name) {
+                    return value[index].contributions;
+                }
+            });
+            if (userCommits != undefined && userCommits?.[0] != undefined) {
+                this.saveUserCommits(key, userCommits[0]?.contributions);
+            }
+        }
+    }
+
+    // saveAllCommits(data) {
+    //     this.#allCommits = [];
+    //     this.#allCommits = { ...data };
+    // }
+
+    saveAllContributions(data) {
+        this.#allContributions = data;
     }
 
     getAllCommits() {
-        return this.filterCommitsBaseOnUserName(this.#allCommits);
+        this.filterCommitsBaseOnUserName(this.#allContributions);
+        return this.#commitPerRepository;
+    }
+
+    resetCommitsValues() {
+        this.#commitPerRepository = [];
+        this.#totalNumberOfCommits = 0;
+    }
+
+    // repos information
+    #allRepositories = [];
+    setAllRespositories(data) {
+        this.#allRepositories = [...data];
     }
 }
 
 export { UserMetrics };
+
+// const data = [
+//     {
+//         login: "alexaorrico",
+//         id: 26891443,
+//         node_id: "MDQ6VXNlcjI2ODkxNDQz",
+//         avatar_url: "https://avatars.githubusercontent.com/u/26891443?v=4",
+//         gravatar_id: "",
+//         url: "https://api.github.com/users/alexaorrico",
+//         html_url: "https://github.com/alexaorrico",
+//         followers_url: "https://api.github.com/users/alexaorrico/followers",
+//         following_url:
+//             "https://api.github.com/users/alexaorrico/following{/other_user}",
+//         gists_url: "https://api.github.com/users/alexaorrico/gists{/gist_id}",
+//         starred_url:
+//             "https://api.github.com/users/alexaorrico/starred{/owner}{/repo}",
+//         subscriptions_url:
+//             "https://api.github.com/users/alexaorrico/subscriptions",
+//         organizations_url: "https://api.github.com/users/alexaorrico/orgs",
+//         repos_url: "https://api.github.com/users/alexaorrico/repos",
+//         events_url: "https://api.github.com/users/alexaorrico/events{/privacy}",
+//         received_events_url:
+//             "https://api.github.com/users/alexaorrico/received_events",
+//         type: "User",
+//         site_admin: false,
+//         contributions: 92,
+//     },
+//     {
+//         login: "jhuang10123",
+//         id: 24196851,
+//         node_id: "MDQ6VXNlcjI0MTk2ODUx",
+//         avatar_url: "https://avatars.githubusercontent.com/u/24196851?v=4",
+//         gravatar_id: "",
+//         url: "https://api.github.com/users/jhuang10123",
+//         html_url: "https://github.com/jhuang10123",
+//         followers_url: "https://api.github.com/users/jhuang10123/followers",
+//         following_url:
+//             "https://api.github.com/users/jhuang10123/following{/other_user}",
+//         gists_url: "https://api.github.com/users/jhuang10123/gists{/gist_id}",
+//         starred_url:
+//             "https://api.github.com/users/jhuang10123/starred{/owner}{/repo}",
+//         subscriptions_url:
+//             "https://api.github.com/users/jhuang10123/subscriptions",
+//         organizations_url: "https://api.github.com/users/jhuang10123/orgs",
+//         repos_url: "https://api.github.com/users/jhuang10123/repos",
+//         events_url: "https://api.github.com/users/jhuang10123/events{/privacy}",
+//         received_events_url:
+//             "https://api.github.com/users/jhuang10123/received_events",
+//         type: "User",
+//         site_admin: false,
+//         contributions: 31,
+//     },
+//     {
+//         login: "patrice012",
+//         id: 73082094,
+//         node_id: "MDQ6VXNlcjczMDgyMDk0",
+//         avatar_url: "https://avatars.githubusercontent.com/u/73082094?v=4",
+//         gravatar_id: "",
+//         url: "https://api.github.com/users/patrice012",
+//         html_url: "https://github.com/patrice012",
+//         followers_url: "https://api.github.com/users/patrice012/followers",
+//         following_url:
+//             "https://api.github.com/users/patrice012/following{/other_user}",
+//         gists_url: "https://api.github.com/users/patrice012/gists{/gist_id}",
+//         starred_url:
+//             "https://api.github.com/users/patrice012/starred{/owner}{/repo}",
+//         subscriptions_url:
+//             "https://api.github.com/users/patrice012/subscriptions",
+//         organizations_url: "https://api.github.com/users/patrice012/orgs",
+//         repos_url: "https://api.github.com/users/patrice012/repos",
+//         events_url: "https://api.github.com/users/patrice012/events{/privacy}",
+//         received_events_url:
+//             "https://api.github.com/users/patrice012/received_events",
+//         type: "User",
+//         site_admin: false,
+//         contributions: 21,
+//     },
+//     {
+//         login: "Salome007",
+//         id: 118170555,
+//         node_id: "U_kgDOBwsjuw",
+//         avatar_url: "https://avatars.githubusercontent.com/u/118170555?v=4",
+//         gravatar_id: "",
+//         url: "https://api.github.com/users/Salome007",
+//         html_url: "https://github.com/Salome007",
+//         followers_url: "https://api.github.com/users/Salome007/followers",
+//         following_url:
+//             "https://api.github.com/users/Salome007/following{/other_user}",
+//         gists_url: "https://api.github.com/users/Salome007/gists{/gist_id}",
+//         starred_url:
+//             "https://api.github.com/users/Salome007/starred{/owner}{/repo}",
+//         subscriptions_url:
+//             "https://api.github.com/users/Salome007/subscriptions",
+//         organizations_url: "https://api.github.com/users/Salome007/orgs",
+//         repos_url: "https://api.github.com/users/Salome007/repos",
+//         events_url: "https://api.github.com/users/Salome007/events{/privacy}",
+//         received_events_url:
+//             "https://api.github.com/users/Salome007/received_events",
+//         type: "User",
+//         site_admin: false,
+//         contributions: 5,
+//     },
+//     {
+//         login: "jvpupcat",
+//         id: 23646064,
+//         node_id: "MDQ6VXNlcjIzNjQ2MDY0",
+//         avatar_url: "https://avatars.githubusercontent.com/u/23646064?v=4",
+//         gravatar_id: "",
+//         url: "https://api.github.com/users/jvpupcat",
+//         html_url: "https://github.com/jvpupcat",
+//         followers_url: "https://api.github.com/users/jvpupcat/followers",
+//         following_url:
+//             "https://api.github.com/users/jvpupcat/following{/other_user}",
+//         gists_url: "https://api.github.com/users/jvpupcat/gists{/gist_id}",
+//         starred_url:
+//             "https://api.github.com/users/jvpupcat/starred{/owner}{/repo}",
+//         subscriptions_url:
+//             "https://api.github.com/users/jvpupcat/subscriptions",
+//         organizations_url: "https://api.github.com/users/jvpupcat/orgs",
+//         repos_url: "https://api.github.com/users/jvpupcat/repos",
+//         events_url: "https://api.github.com/users/jvpupcat/events{/privacy}",
+//         received_events_url:
+//             "https://api.github.com/users/jvpupcat/received_events",
+//         type: "User",
+//         site_admin: false,
+//         contributions: 2,
+//     },
+// ];
+
+// const user = new UserMetrics("patrice012");
+
+// user.saveAllContributions(data);
+
+// console.log(user.getAllCommits());
