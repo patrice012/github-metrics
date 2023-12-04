@@ -18,9 +18,13 @@ export const FormInput = () => {
         // profile information
         const info = await getProfileInformation(formData.get("username"));
         // create user ==> use the login instead of name
-        const user = new UserMetrics(info.login);
-        user.globalData = info;
-        addUser(user);
+        if (info) {
+            const user = new UserMetrics(info.login);
+            if (user) {
+                user.globalData = info;
+                addUser(user);
+            }
+        }
 
         //reset input state
         if (info) {

@@ -15,7 +15,6 @@ import {
 // const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
 const colors = ["#8884d8", "#82ca9d", "#19d"];
 
-
 const getPath = (x, y, width, height) => {
     return `M${x},${y + height}C${x + width / 3},${y + height} ${
         x + width / 2
@@ -28,20 +27,38 @@ const getPath = (x, y, width, height) => {
 };
 
 const TriangleBar = (props) => {
-    console.log(props)
     const { fill, x, y, width, height } = props;
-
     return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
 };
 
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="custom-tooltip">
+                <p className="label">{label}</p>
+                <p className="label-second">
+                    {payload[0].value > 1? 'commits: ': 'commit: '}
+                    {payload[0].value}
+                </p>
+            </div>
+        );
+    }
+
+    return null;
+};
+
 export function ShapeBarChart({ user }) {
-    const maxNumber = 6;
-    const commits = user.allCommits?.slice(0, maxNumber)?.map((value, _) => {
-        return {
-            name: Object.keys(value)[0],
-            value: Object.values(value)[0],
-        };
-    });
+    const maxNumber = 8;
+    // get repository with most commits
+    const commits = [...user.allCommits]
+        ?.sort((a, b) => Object.values(b)[0] - Object.values(a)[0])
+        .slice(0, maxNumber)
+        ?.map((value, _) => {
+            return {
+                name: Object.keys(value)[0],
+                value: Object.values(value)[0],
+            };
+        });
 
     return (
         <>
@@ -60,7 +77,7 @@ export function ShapeBarChart({ user }) {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                     <Legend />
 
                     <Bar
