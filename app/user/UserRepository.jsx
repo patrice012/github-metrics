@@ -5,11 +5,14 @@ import style from "./_partials/_respositories.scss";
 import { useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
+import { CommitsMetrics } from "./CommitsMetrics";
+
 
 export const UserRespositories = ({ userData }) => {
     const [repositories, setRepositories] = useState([]);
     const [contributions, setContributions] = useState({});
-    const { user } = useContext(UserContext);
+    const { user, addUser } = useContext(UserContext);
+    // const [reload, setReload] = useState(false)
 
     useEffect(() => {
         if (!userData) {
@@ -28,10 +31,7 @@ export const UserRespositories = ({ userData }) => {
     if (repositories) {
         user.setAllRespositories(repositories);
     }
-
-    // console.log(user.getAllCommits(), "all contributions");
-
-    // console.log(user.getTotalNumberOfCommits(), "getTotalNumberOfCommits");
+   user.getAllCommits();
 
     return (
         <>
@@ -46,6 +46,9 @@ export const UserRespositories = ({ userData }) => {
                     ))}
                 </div>
             </section>
+            {/* {user.totalNumberOfCommits && <CommitsMetrics user={user} />} */}
+
+            <CommitsMetrics user={user} />
         </>
     );
 };
