@@ -1,6 +1,4 @@
 const JWT = process.env.NEXT_PUBLIC_API_KEY;
-console.log(JWT)
-
 export async function fetchData(url) {
     try {
         const res = await fetch(url, {
