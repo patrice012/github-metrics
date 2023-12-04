@@ -5,14 +5,13 @@ import style from "./_partials/_respositories.scss";
 import { useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
-import { CommitsMetrics } from "./CommitsMetrics";
+import { MetricsChart } from "./metrics";
 
 
 export const UserRespositories = ({ userData }) => {
     const [repositories, setRepositories] = useState([]);
     const [contributions, setContributions] = useState({});
-    const { user, addUser } = useContext(UserContext);
-    // const [reload, setReload] = useState(false)
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         if (!userData) {
@@ -21,6 +20,7 @@ export const UserRespositories = ({ userData }) => {
         (async () => {
             const repos = await getUserRespositories(userData.login);
             setRepositories(repos);
+            setContributions({})
         })();
     }, [userData]);
 
@@ -31,12 +31,12 @@ export const UserRespositories = ({ userData }) => {
     if (repositories) {
         user.setAllRespositories(repositories);
     }
-   user.getAllCommits();
+   user.allCommits;
 
     return (
         <>
             <section className="listOfRespositories">
-                <div className="container">
+                {/* <div className="container">
                     {repositories?.map((repos, index) => (
                         <Respository
                             key={index}
@@ -44,11 +44,11 @@ export const UserRespositories = ({ userData }) => {
                             setContributions={setContributions}
                         />
                     ))}
-                </div>
+                </div> */}
             </section>
-            {/* {user.totalNumberOfCommits && <CommitsMetrics user={user} />} */}
+            {/* {user.totalNumberOfCommits && <MetricsChart user={user} />} */}
 
-            <CommitsMetrics user={user} />
+            <MetricsChart user={user} />
         </>
     );
 };

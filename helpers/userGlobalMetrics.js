@@ -107,8 +107,9 @@ class UserMetrics {
     #totalNumberOfCommits = 0;
     #allContributions = [];
     #commitsRepos = [];
+    #allRepositories = [];
 
-    saveUserCommits(repos, contributions) {
+    #saveUserCommits(repos, contributions) {
         if (!this.#commitsRepos.includes(repos)) {
             this.#commitPerRepository = [
                 ...this.#commitPerRepository,
@@ -120,7 +121,7 @@ class UserMetrics {
         }
     }
 
-    getTotalNumberOfCommits() {
+    #getTotalNumberOfCommits() {
         const initialValue = 0;
         this.#totalNumberOfCommits = this.#commitPerRepository.reduce(
             (accumulator, obj) => accumulator + Object.values(obj)[0],
@@ -131,11 +132,11 @@ class UserMetrics {
     }
 
     get totalNumberOfCommits() {
-        this.getAllCommits();
-        return this.getTotalNumberOfCommits()
+        this.#getAllCommits();
+        return this.#getTotalNumberOfCommits();
     }
 
-    filterCommitsBaseOnUserName(data) {
+    #filterCommitsBaseOnUserName(data) {
         for (const [key, value] of Object.entries(data)) {
             const userCommits = value?.filter((_, index) => {
                 if (value[index]?.login === this.name) {
@@ -143,35 +144,59 @@ class UserMetrics {
                 }
             });
             if (userCommits != undefined && userCommits?.[0] != undefined) {
-                this.saveUserCommits(key, userCommits[0]?.contributions);
+                this.#saveUserCommits(key, userCommits[0]?.contributions);
             }
         }
     }
 
-    // saveAllCommits(data) {
-    //     this.#allCommits = [];
-    //     this.#allCommits = { ...data };
-    // }
+    #filterRespositoryInformation(data) {
+        let reposContributions = [];
+        for (const [key, value] of Object.entries(data)) {
+            const userCommits = value?.map((_, index) => {
+                return {
+                    login: value[index].login,
+                    contributions: value[index].contributions,
+                };
+            });
+
+            const reposInfo = { [key]: userCommits };
+            reposContributions = [...reposContributions, reposInfo];
+        }
+        return reposContributions;
+    }
+
+    get repositoryMetrics() {
+        return this.#filterRespositoryInformation(this.#allContributions);
+    }
 
     saveAllContributions(data) {
         this.#allContributions = data;
     }
 
-    getAllCommits() {
-        this.filterCommitsBaseOnUserName(this.#allContributions);
+    #getAllCommits() {
+        this.#filterCommitsBaseOnUserName(this.#allContributions);
         return this.#commitPerRepository;
     }
 
+    get allCommits() {
+        return this.#getAllCommits();
+    }
 
-    resetCommitsValues() {
+    #resetValues() {
         this.#commitPerRepository = [];
         this.#totalNumberOfCommits = 0;
+        this.#allContributions = [];
+        this.#commitsRepos = [];
+        this.#allRepositories = [];
     }
 
     // repos information
-    #allRepositories = [];
     setAllRespositories(data) {
         this.#allRepositories = [...data];
+    }
+
+    get allRepositories() {
+        return this.#allRepositories;
     }
 }
 
