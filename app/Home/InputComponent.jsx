@@ -1,4 +1,4 @@
-import { FormInput } from "./FromInput";
+import { FormInput } from "./FormInput";
 
 export const InputComponent = () => {
     return (
