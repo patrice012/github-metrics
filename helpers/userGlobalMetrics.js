@@ -59,14 +59,21 @@ class UserMetrics {
 
     // set user needed information
     _globalData = {};
+    _initialData = {}
     #setImportantFields = (key, value) => {
         this._globalData[key] = value;
     };
+
+
+    get initialData(){
+        return this._initialData
+    }
 
     /**
      * @param {(arg0: { login: string; id: number; node_id: string; avatar_url: string; gravatar_id: string; url: string; html_url: string; followers_url: string; following_url: string; gists_url: string; starred_url: string; subscriptions_url: string; organizations_url: string; repos_url: string; events_url: string; received_events_url: string; type: string; site_admin: boolean; name: string; company: any; blog: string; location: any; email: string; hireable: any; bio: any; twitter_username: any; public_repos: number; public_gists: number; followers: number; following: number; created_at: string; updated_at: string; private_gists: number; total_private_repos: number; owned_private_repos: number; disk_usage: number; collaborators: number; two_factor_authentication: boolean; plan: { name: string; space: number; collaborators: number; private_repos: number; }; }) => void} data
      */
     set globalData(data) {
+this._initialData = {...data}
         try {
             for (const [key, value] of Object.entries(data)) {
                 if (!this.initialFields.includes(key)) {
@@ -225,6 +232,12 @@ class UserMetrics {
     get programmingLanguages() {
         this.#filterRespositoryInformation(this.#allRepositories);
         return this.#listOfLanguages;
+    }
+
+    // user contributions
+    #githubContributions = [ ]
+    saveGitHubContributions(data) {
+        this.#githubContributions = data;
     }
 }
 

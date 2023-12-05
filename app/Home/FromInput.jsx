@@ -28,7 +28,7 @@ export const FormInput = () => {
         }
         // get user contributions
         if (info) {
-            const contributions = getContributions(info.login);
+            const contributions =await getContributions(info.login);
             console.log(contributions, "contributions");
         }
 

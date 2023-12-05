@@ -35,7 +35,7 @@ async function getContributions(token, username) {
 
 (async () => {
     const data = await getContributions(
-        "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",
+        "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",
         "patrice012"
     );
     console.log(data);

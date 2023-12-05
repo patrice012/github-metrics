@@ -5,6 +5,7 @@ import { HomeInterface } from "./Home/HomePage";
 import { UserContext } from "@/context/userContext";
 import { UserRespositories } from "@/components/user/UserRepository";
 import { AccountDetail } from "@/components/user/AccountDetail";
+import { Calendar } from "@/components/user/calendar";
 
 export default function Home() {
     const { user } = useContext(UserContext);
@@ -13,6 +14,7 @@ export default function Home() {
     return (
         <>
             <HomeInterface>
+                {user && <Calendar userData={user.initialData} />}
                 {/* {user && <AccountDetail userData={userData} />} */}
                 {user && <UserRespositories userData={userData} />}
             </HomeInterface>
