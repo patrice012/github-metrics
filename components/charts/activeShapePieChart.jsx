@@ -2,13 +2,6 @@
 import { useState } from "react";
 import { PieChart, Pie, Sector, ResponsiveContainer } from "recharts";
 
-const data = [
-    { name: "Group A", value: 400 },
-    { name: "Group B", value: 300 },
-    { name: "Group C", value: 300 },
-    { name: "Group D", value: 200 },
-];
-
 const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
     const {
@@ -68,7 +61,7 @@ const renderActiveShape = (props) => {
                 y={ey}
                 textAnchor={textAnchor}
                 fill="#333"
-            >{`PV ${value}`}</text>
+            >{`${payload.name}: ${value}`}</text>
             <text
                 x={ex + (cos >= 0 ? 1 : -1) * 12}
                 y={ey}
@@ -82,11 +75,11 @@ const renderActiveShape = (props) => {
     );
 };
 
-export function ActiveShapePieChart() {
-  const [activeIndex, setActiveIndex] = useState(0)
+export function ActiveShapePieChart({ data }) {
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const onPieEnter = (_, index) => {
-      setActiveIndex(index);
+        setActiveIndex(index);
     };
 
     return (

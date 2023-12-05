@@ -10,6 +10,8 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+// use this to show a number of commits per year and a number of repos create in the same year
+
 const AreaChartPlot = () => {
     const data = [
         {

@@ -13,7 +13,17 @@ import {
 } from "recharts";
 
 // const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
-const colors = ["#8884d8", "#82ca9d", "#19d"];
+// const colors = ["#8884d8", "#82ca9d", "#19d"];
+const colors = [
+    "#8884d8",
+    "#83a6ed",
+    "#3DED97",
+    "#3AC7EB",
+    "#0088FE",
+    "#00C49F",
+    "#8dd1e1",
+    "#82ca9d",
+];
 
 const getPath = (x, y, width, height) => {
     return `M${x},${y + height}C${x + width / 3},${y + height} ${
@@ -89,15 +99,15 @@ export function ShapeBarChart({ user }) {
                         {commits.map((entry, index) => (
                             <Cell
                                 key={`cell-${index}`}
-                                fill={colors[index % colors.length]}
-                                // fill={
-                                //     colors[
-                                //         Math.floor(
-                                //             Math.random() *
-                                //                 (colors.length - 0 + 1)
-                                //         ) + 0
-                                //     ]
-                                // }
+                                // fill={colors[index % colors.length]}
+                                fill={
+                                    colors[
+                                        Math.floor(
+                                            Math.random() *
+                                                (colors.length - 0 + 1)
+                                        ) + 0
+                                    ]
+                                }
                             />
                         ))}
                     </Bar>
