@@ -33,26 +33,12 @@ async function getContributions(token, username) {
     return data;
 }
 
+
+
 (async () => {
-    const data = await getContributions(
+    const res = await getContributions(
         "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",
         "patrice012"
     );
-    console.log(data);
-    // console.log(data.data.user.contributionsCollection);
-    // for (
-    //     let i = 0;
-    //     i <
-    //     data.data.user.contributionsCollection.contributionCalendar.weeks
-    //         .length;
-    //     i++
-    // ) {
-    //     let week =
-    //         data.data.user.contributionsCollection.contributionCalendar.weeks[
-    //             i
-    //         ];
-    //     console.log(week, "week");
-    // }
-    // console.log(data);
-    // console.log(data);
+    console.log(res);
 })();
