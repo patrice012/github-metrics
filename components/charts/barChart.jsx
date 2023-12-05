@@ -1,7 +1,6 @@
 "use client";
 
 import {
-   
     BarChart,
     Bar,
     Rectangle,
@@ -12,7 +11,6 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
-
 
 export function BarChartPlot({ user }) {
     const commistInRepos = user.repositoryMetrics;
@@ -56,15 +54,11 @@ export function BarChartPlot({ user }) {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                <Bar
-                    dataKey="user"
-                    fill="#8884d8"
-                    activeBar={<Rectangle fill="pink" stroke="blue" />}
-                />
+                <Bar dataKey="user" fill="#8884d8" activeBar={<Rectangle />} />
                 <Bar
                     dataKey="others"
                     fill="#82ca9d"
-                    activeBar={<Rectangle fill="gold" stroke="purple" />}
+                    activeBar={<Rectangle />}
                 />
             </BarChart>
         </ResponsiveContainer>

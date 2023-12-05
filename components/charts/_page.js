@@ -2,7 +2,7 @@ import { BarChartPlot } from "./barChart";
 import { AreaChartPlot } from "./areaChart";
 import { LineChartPlot } from "./lineChart";
 import { PieChartPlot } from "./pieChart";
-import { ShapeBarChart } from "./shapeBarChart";
+import { CommitsInRepository } from "./CommitsInRepository";
 import { ActiveShapePieChart } from "./activeShapePieChart";
 
 export default function Chard() {
@@ -37,7 +37,7 @@ export default function Chard() {
             <section className="flex my-4 px-4 gap-3">
                 <div className=" w-1/2 h-[250px]  rounded">
                     <h3 className="title">Commits per repository</h3>
-                    <ShapeBarChart />
+                    <CommitsInRepository />
                 </div>
                 <div className=" w-1/2 h-[250px]  rounded">
                     <h3 className="title">Longest Streack</h3>

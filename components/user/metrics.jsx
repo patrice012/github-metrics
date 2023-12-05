@@ -1,16 +1,17 @@
 import { BarChartPlot } from "../charts/barChart";
 import { AreaChartPlot } from "../charts/areaChart";
 import { LineChartPlot } from "../charts/lineChart";
-import { ShapeBarChart } from "../charts/shapeBarChart";
+import { CommitsInRepository } from "../charts/commitsInRepository";
 import { ContributionsChart } from "../charts/contributionChart";
 import { ProgrammingLanguageChart } from "../charts/languageChart";
+import { RepositoryContributions } from "../charts/repositoryContributions";
 
 export function MetricsChart({ user }) {
     // console.log(user.repositoryMetrics, "repositoryMetrics");
     // console.log(user.allCommits, "allCommits");
     // console.log(user.totalNumberOfCommits, "totalNumberOfCommits");
 
-    // console.log(user.allRepositories, "allRepositories");
+    // console.log(user.repositoryContributions, "repositoryContributions");
 
     return (
         <>
@@ -46,7 +47,14 @@ export function MetricsChart({ user }) {
             <section className="flex my-4 px-4 gap-3">
                 <div className="w-screen h-[250px]  rounded">
                     <h3 className="title">Commits per repository</h3>
-                    <ShapeBarChart user={user} />
+                    <CommitsInRepository user={user} />
+                </div>
+            </section>
+
+            <section className="flex my-4 px-4 gap-3">
+                <div className="w-screen h-[250px]  rounded">
+                    <h3 className="title">Repository contributions</h3>
+                    <RepositoryContributions user={user} />
                 </div>
             </section>
         </>

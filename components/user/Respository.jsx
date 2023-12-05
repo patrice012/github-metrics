@@ -15,7 +15,7 @@ export const Respository = ({ repos, setContributions }) => {
 
     return (
         <>
-            <div className="repository--container">
+            {/* <div className="repository--container">
                 <div className="fields--container">
                     <h2 className="owner--username">{repos.owner.login}</h2>
                 </div>
@@ -48,7 +48,7 @@ export const Respository = ({ repos, setContributions }) => {
                 <Link href={repos.html_url} className="more-information">
                     View in Github
                 </Link>
-            </div>
+            </div> */}
         </>
     );
 };
