@@ -11,7 +11,9 @@ export function MetricsChart({ user }) {
     // console.log(user.allCommits, "allCommits");
     // console.log(user.totalNumberOfCommits, "totalNumberOfCommits");
 
-    // console.log(user.repositoryContributions, "repositoryContributions");
+    console.log(user.contributionsPerWeek, "contributionsPerWeek");
+    console.log(user.contributionsPerMonths, "contributionsPerMonths");
+    console.log(user.contributionsPerYear, "contributionsPerYear");
 
     return (
         <>
