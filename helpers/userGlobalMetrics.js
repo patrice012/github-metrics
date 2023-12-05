@@ -212,7 +212,6 @@ class UserMetrics {
                     this.#listOfLanguages[repos?.language] = 1;
                 }
             }
-            console.log(this.#listOfLanguages, "this.#listOfLanguages");
             return {
                 user: repos?.owner?.login,
                 name: repos?.name,
@@ -224,7 +223,6 @@ class UserMetrics {
     }
 
     get programmingLanguages() {
-        console.log('prrrrrrrr')
         this.#filterRespositoryInformation(this.#allRepositories);
         return this.#listOfLanguages;
     }

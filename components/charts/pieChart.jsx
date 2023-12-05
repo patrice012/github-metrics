@@ -10,11 +10,11 @@ import {
 
 const colors = [
     "#8884d8",
-    "#FA8072",
     "#AF69EE",
     "#3DED97",
     "#3AC7EB",
-    "#F9A603",
+    "#0088FE",
+    "#00C49F",
 ];
 
 const PieChartPlot = ({ user }) => {
@@ -36,7 +36,9 @@ const PieChartPlot = ({ user }) => {
                 <div className="custom-tooltip">
                     <p className="label">{label}</p>
                     <p className="label-second">
-                        {`used: ${(payload[0].value * 100) / total} %`}
+                        {`used: ${Math.floor(
+                            (payload[0].value * 100) / total
+                        )} %`}
                     </p>
                 </div>
             );
@@ -56,11 +58,20 @@ const PieChartPlot = ({ user }) => {
                         cy="50%"
                         fill="#8884d8"
                         label={data}
-                        // labelLine={false}
-                        // label={renderCustomizedLabel}
                     >
                         {data?.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colors[index]} />
+                            <Cell
+                                key={`cell-${index}`}
+                                // fill={colors[index]}
+                                fill={
+                                    colors[
+                                        Math.floor(
+                                            Math.random() *
+                                                (colors.length - 0 )
+                                        ) + 0
+                                    ]
+                                }
+                            />
                         ))}
                     </Pie>
                     <Tooltip content={CustomTooltip} />

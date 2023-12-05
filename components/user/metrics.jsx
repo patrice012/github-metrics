@@ -6,11 +6,11 @@ import { ShapeBarChart } from "../charts/shapeBarChart";
 import { ActiveShapePieChart } from "../charts/activeShapePieChart";
 
 export function MetricsChart({ user }) {
-    // console.log(user.repositoryMetrics, "repositoryMetrics");
+    console.log(user.repositoryMetrics, "repositoryMetrics");
     // console.log(user.allCommits, "allCommits");
     // console.log(user.totalNumberOfCommits, "totalNumberOfCommits");
 
-    console.log(user.allRepositories, "allRepositories");
+    // console.log(user.allRepositories, "allRepositories");
 
     return (
         <>
