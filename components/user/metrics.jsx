@@ -4,6 +4,7 @@ import { LineChartPlot } from "../charts/lineChart";
 import { PieChartPlot } from "../charts/pieChart";
 import { ShapeBarChart } from "../charts/shapeBarChart";
 import { ActiveShapePieChart } from "../charts/activeShapePieChart";
+import { RadialChart } from "../charts/radialChart";
 
 export function MetricsChart({ user }) {
     // console.log(user.repositoryMetrics, "repositoryMetrics");
@@ -24,6 +25,16 @@ export function MetricsChart({ user }) {
 
                     <PieChartPlot user={user} />
                 </div>
+            </section>
+            <section className="flex my-4 px-4 gap-3">
+                <div className=" w-1/2 h-[250px]  rounded">
+                    <h3 className="title">User contribuions ==</h3>
+                    <RadialChart user={user} />
+                </div>
+                {/* <div className=" w-1/2 h-[250px]  rounded">
+                    <h3 className="title">{user.name} programing languages</h3>
+
+                </div> */}
             </section>
             <section className="flex my-4 px-4 gap-3">
                 <div className="w-1/2 h-[300px]  rounded">

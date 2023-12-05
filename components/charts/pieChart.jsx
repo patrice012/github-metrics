@@ -36,7 +36,7 @@ const PieChartPlot = ({ user }) => {
                 <div className="custom-tooltip">
                     <p className="label">{label}</p>
                     <p className="label-second">
-                        {`used: ${Math.floor(
+                        {`${payload[0].name}: ${Math.floor(
                             (payload[0].value * 100) / total
                         )} %`}
                     </p>
@@ -66,8 +66,7 @@ const PieChartPlot = ({ user }) => {
                                 fill={
                                     colors[
                                         Math.floor(
-                                            Math.random() *
-                                                (colors.length - 0 )
+                                            Math.random() * (colors.length - 0)
                                         ) + 0
                                     ]
                                 }
