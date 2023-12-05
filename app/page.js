@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <>
             <HomeInterface>
-                {user && <AccountDetail userData={userData} />}
+                {/* {user && <AccountDetail userData={userData} />} */}
                 {user && <Calendar userData={user.globalData} />}
                 {user && <UserRespositories userData={userData} />}
             </HomeInterface>
