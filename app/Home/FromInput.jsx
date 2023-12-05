@@ -25,11 +25,10 @@ export const FormInput = () => {
                 user.globalData = info;
                 addUser(user);
             }
-        }
-        // get user contributions
-        if (info) {
-            const contributions =await getContributions(info.login);
-            console.log(contributions, "contributions");
+
+            // get user contributions
+            const contributions = await getContributions(info.login);
+            user.saveGitHubContributions(contributions);
         }
 
         //reset input state
