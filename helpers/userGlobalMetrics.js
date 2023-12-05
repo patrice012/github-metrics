@@ -239,9 +239,12 @@ class UserMetrics {
     #numberOfIssues = {};
     #numberOfPullRequest = {};
     #numberOfReviews = {};
+    #userContributionCalendar = [];
 
     saveGitHubContributions(result) {
         this.#githubContributions = result.data.user.contributionsCollection;
+        this.#userContributionCalendar =
+            this.#githubContributions.contributionCalendar.weeks;
         this.#repositoriesContributions =
             this.#githubContributions.commitContributionsByRepository;
         this.#numberOfIssues = this.#githubContributions.issueContributions;
@@ -251,6 +254,49 @@ class UserMetrics {
             this.#githubContributions.pullRequestReviewContributions;
     }
 
+    get contributionsPerYear() {
+        const dataPerWeek = this.contributionsPerMonths;
+        const data = {};
+        for (let [key, value] of Object.entries(dataPerWeek)) {
+            const month = key.split("-")[0];
+            if (Object.keys(data).includes(month)) {
+                data[month] += value;
+            } else {
+                data[month] = value;
+            }
+        }
+        return data;
+    }
+
+    get contributionsPerMonths() {
+        const dataPerWeek = this.contributionsPerWeek;
+        const data = {}
+        for (let [key, value] of Object.entries(dataPerWeek)) {
+            const month = key.split("-").slice(0, 2).join("-");
+            if (Object.keys(data).includes(month)) {
+                data[month] += value
+            } else {
+                data[month] = value;
+            }
+        }
+        return data
+    }
+
+    get contributionsPerWeek() {
+        const data = {};
+        this.#userContributionCalendar?.map((contrib, _) => {
+            const initialValue = 0;
+            const count = contrib.contributionDays.reduce(
+                (accumulator, obj) => accumulator + obj.contributionCount,
+                initialValue
+            );
+            data[contrib.firstDay] = count;
+        });
+
+        return data;
+    }
+
+    // contributions types
     get numberOfIssues() {
         return this.#numberOfIssues.totalCount;
     }

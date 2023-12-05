@@ -55,14 +55,13 @@ async function getContributions(token, username) {
 
 (async () => {
     const res = await getContributions(
-        "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",
+        "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",
         "patrice012"
     );
+    console.log(res.data.user.contributionsCollection.contributionCalendar);
     console.log(
-        res.data.user.contributionsCollection.commitContributionsByRepository
+        res.data.user.contributionsCollection.contributionCalendar.weeks[0]
+            .contributionDays
     );
-   console.log(res.data.user.contributionsCollection.pullRequestContributions);
-   console.log(
-       res.data.user.contributionsCollection.pullRequestReviewContributions
-   );
+  
 })();
