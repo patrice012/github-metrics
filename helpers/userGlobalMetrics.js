@@ -235,13 +235,14 @@ class UserMetrics {
 
     // user contributions
     #githubContributions = [];
-    #repositoryContributions = {};
+    #repositoriesContributions = [];
     #numberOfIssues = {};
     #numberOfPullRequest = {};
     #numberOfReviews = {};
+
     saveGitHubContributions(result) {
         this.#githubContributions = result.data.user.contributionsCollection;
-        this.#repositoryContributions =
+        this.#repositoriesContributions =
             this.#githubContributions.commitContributionsByRepository;
         this.#numberOfIssues = this.#githubContributions.issueContributions;
         this.#numberOfPullRequest =
@@ -259,7 +260,10 @@ class UserMetrics {
     get numberOfReviews() {
         return this.#numberOfReviews.totalCount;
     }
+
+    get repositoriesContributions() {
+        return this.#repositoriesContributions;
+    }
 }
 
 export { UserMetrics };
-

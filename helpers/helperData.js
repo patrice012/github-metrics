@@ -20,6 +20,24 @@ async function getContributions(token, username) {
                     firstDay
                   }
                 }
+                commitContributionsByRepository {
+                  contributions {
+                    totalCount
+                    
+                  }
+                  repository {
+                    name
+                  }
+                }
+                pullRequestContributions {
+                  totalCount
+                }
+                issueContributions {
+                  totalCount
+                }
+                pullRequestReviewContributions {
+                  totalCount
+                }
               }
             }
           }`,
@@ -37,8 +55,14 @@ async function getContributions(token, username) {
 
 (async () => {
     const res = await getContributions(
-        "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",
+        "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",
         "patrice012"
     );
-    console.log(res);
+    console.log(
+        res.data.user.contributionsCollection.commitContributionsByRepository
+    );
+   console.log(res.data.user.contributionsCollection.pullRequestContributions);
+   console.log(
+       res.data.user.contributionsCollection.pullRequestReviewContributions
+   );
 })();
