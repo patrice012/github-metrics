@@ -5,6 +5,7 @@ import { baseUrl } from "../../utils/api-endpoint";
 import { UserContext } from "@/context/userContext";
 import { fetchData } from "@/utils/fetch";
 import { UserMetrics } from "@/helpers/userGlobalMetrics";
+import { getContributions } from "@/utils/graphqlFetch";
 
 export const FormInput = () => {
     const { addUser } = useContext(UserContext);
@@ -24,6 +25,11 @@ export const FormInput = () => {
                 user.globalData = info;
                 addUser(user);
             }
+        }
+        // get user contributions
+        if (info) {
+            const contributions = getContributions(info.login);
+            console.log(contributions, "contributions");
         }
 
         //reset input state

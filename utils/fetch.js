@@ -3,7 +3,7 @@ export async function fetchData(url) {
     try {
         const res = await fetch(url, {
             headers: {
-                Authorization: `Bearer ${JWT}`,
+                Authorization: `bearer ${JWT}`,
             },
         });
         if (!res.ok) {

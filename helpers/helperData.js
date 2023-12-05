@@ -38,15 +38,21 @@ async function getContributions(token, username) {
         "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",
         "patrice012"
     );
-    // console.log(data);
-    console.log(data.data.user.contributionsCollection);
-    for (let i = 0; i < data.data.user.contributionsCollection.contributionCalendar.weeks.length; i++){
-        let week =
-            data.data.user.contributionsCollection.contributionCalendar.weeks[
-                i
-            ];
-        console.log(week, 'week')
-    }
+    console.log(data);
+    // console.log(data.data.user.contributionsCollection);
+    // for (
+    //     let i = 0;
+    //     i <
+    //     data.data.user.contributionsCollection.contributionCalendar.weeks
+    //         .length;
+    //     i++
+    // ) {
+    //     let week =
+    //         data.data.user.contributionsCollection.contributionCalendar.weeks[
+    //             i
+    //         ];
+    //     console.log(week, "week");
+    // }
     // console.log(data);
     // console.log(data);
 })();
