@@ -1,7 +1,7 @@
 .metrics {
-    margin-block: clamp(3rem, 4.2rem + 2vw, 8rem);
+    padding-block: clamp(3rem, 4.2rem + 2vw, 8rem);
     &:last-of-type {
-        margin-block: clamp(4rem, 7rem + 7vw, 11rem);
+        padding-block: clamp(4rem, 7rem + 7vw, 11rem);
     }
 
     & .wrapper {
