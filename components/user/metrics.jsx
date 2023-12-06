@@ -5,15 +5,18 @@ import { CommitsInRepository } from "../charts/commitsInRepository";
 import { ContributionsChart } from "../charts/contributionChart";
 import { ProgrammingLanguageChart } from "../charts/languageChart";
 import { RepositoryContributions } from "../charts/repositoryContributions";
+import { ContributionsChartForMonth } from "../charts/contributionsPerMonth";
+import { ContributionsChartForDay } from "../charts/contributionsPerDay";
+import { ContributionsChartForYear } from "../charts/contributionsPerYear";
 
 export function MetricsChart({ user }) {
     // console.log(user.repositoryMetrics, "repositoryMetrics");
     // console.log(user.allCommits, "allCommits");
     // console.log(user.totalNumberOfCommits, "totalNumberOfCommits");
 
-    console.log(user.contributionsPerWeek, "contributionsPerWeek");
-    console.log(user.contributionsPerMonths, "contributionsPerMonths");
-    console.log(user.contributionsPerYear, "contributionsPerYear");
+    // console.log(user.contributionsPerWeek, "contributionsPerWeek");
+    // console.log(user.contributionsPerMonths, "contributionsPerMonths");
+    // console.log(user.contributionsPerYear, "contributionsPerYear");
 
     return (
         <>
@@ -29,6 +32,13 @@ export function MetricsChart({ user }) {
                 </div>
             </section>
             <section className="flex my-4 px-4 gap-3">
+                <div className=" w-screen h-[250px]  rounded">
+                    <h3 className="title">Month contributions</h3>
+
+                    <ContributionsChartForMonth user={user} />
+                </div>
+            </section>
+            <section className="flex my-4 px-4 gap-3">
                 <div className="w-1/2 h-[300px]  rounded">
                     <h3 className="title">
                         {user.name} commits vs contributor commits in repository
@@ -36,20 +46,25 @@ export function MetricsChart({ user }) {
                     <BarChartPlot user={user} />
                 </div>
                 <div className="w-1/2 h-[300px]  rounded">
-                    <h3 className="title">{user.name} activities</h3>
-                    <LineChartPlot user={user} />
+                    <h3 className="title">All times contributions</h3>
+                    {/* <LineChartPlot user={user} /> */}
+                    <ContributionsChartForDay user={user} />
                 </div>
             </section>
-            <section className="flex my-4 px-4 gap-3">
+            {/* <section className="flex my-4 px-4 gap-3">
                 <div className=" w-screen h-[250px]  rounded">
                     <h3 className="title">{user.name}all times activities</h3>
                     <AreaChartPlot user={user} />
                 </div>
-            </section>
+            </section> */}
             <section className="flex my-4 px-4 gap-3">
-                <div className="w-screen h-[250px]  rounded">
+                <div className="w-1/2 h-[250px]  rounded">
                     <h3 className="title">Commits per repository</h3>
                     <CommitsInRepository user={user} />
+                </div>
+                <div className="w-1/2 h-[250px]  rounded">
+                    <h3 className="title">Year contribution</h3>
+                    <ContributionsChartForYear user={user} />
                 </div>
             </section>
 
