@@ -1,11 +1,13 @@
 import Link from "next/link";
 
+import style from "./_partials/_profile.scss";
+
 export const AccountDetail = ({ userData }) => {
     return (
         <>
-            {userData ? (
-                <section className="account-detail">
-                    <div className="container">
+            <div className="container">
+                {userData ? (
+                    <section className="account-detail">
                         <div className="main-information">
                             <img
                                 src={userData.avatar_url}
@@ -15,27 +17,25 @@ export const AccountDetail = ({ userData }) => {
                             <h3 className="name">
                                 Login Name: {userData.login}
                             </h3>
-                            <h4 className="location">
-                                Login Name: {userData.location}
-                            </h4>
-                            <Link href={`mailto:${userData.email}`}>
-                                {userData.email}
-                            </Link>
+                            {userData.location && (
+                                <h4 className="location">
+                                    Location: {userData.location}
+                                </h4>
+                            )}
+                            {userData.email && (
+                                <Link href={`mailto:${userData.email}`}>
+                                    Email: {userData.email}
+                                </Link>
+                            )}
                         </div>
                         <div className="profile">
                             <h4 className="followers">
                                 <span>Followings:</span>{" "}
                                 <span>{userData.following}</span>
-                                <Link href={userData.following_url}>
-                                    View Followings
-                                </Link>
                             </h4>
                             <h4 className="following">
                                 <span>Followers:</span>{" "}
                                 <span>{userData.followers}</span>
-                                <Link href={userData.followers_url}>
-                                    View Followers
-                                </Link>
                             </h4>
                             <h4 className="join-at">
                                 <span>Join at:</span>{" "}
@@ -50,10 +50,10 @@ export const AccountDetail = ({ userData }) => {
                                 <span>{userData.public_gists}</span>
                             </h4>
                         </div>
-                        <div className="bio">{userData.bio}</div>
-                    </div>
-                </section>
-            ) : null}
+                        {/* <div className="bio">{userData.bio}</div> */}
+                    </section>
+                ) : null}
+            </div>
         </>
     );
 };

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styel from "./_partials/_repository.scss";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { fetchData } from "@/utils/fetch";
 import { baseUrl } from "../../utils/api-endpoint";
 
@@ -20,24 +20,24 @@ export const Respository = ({ repos, setContributions }) => {
                     <h2 className="owner--username">{repos.owner.login}</h2>
                 </div>
                 <div className="fields--container">
-                    <h2 className="repository--name">Name:{repos.name}</h2>
+                    <h2 className="repository--name">Name: {repos.name}</h2>
                     <h2 className="repository--create-at">
-                        Create at:{repos.created_at}
+                        Create at: {repos.created_at}
                     </h2>
                     <h2 className="repository--create-at">
                         Last Update: {repos.updated_at}
                     </h2>
                     <h4 className="repository--fork-count">
-                        Fork count:{repos.forks_count}
+                        Fork count: {repos.forks_count}
                     </h4>
                     <h4 className="repository--fork-count">
-                        Star count:{repos.stargazers_count}
+                        Star count: {repos.stargazers_count}
                     </h4>
                     <h4 className="repository--watcher-count">
-                        Watcher count:{repos.watchers_count}
+                        Watcher count: {repos.watchers_count}
                     </h4>
                     <h4 className="repository--language">
-                        Language:{repos.language}
+                        Language: {repos.language}
                     </h4>
                 </div>
                 <div>

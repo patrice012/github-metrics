@@ -7,19 +7,19 @@ import { fetchData } from "@/utils/fetch";
 import { UserMetrics } from "@/helpers/userGlobalMetrics";
 import { getContributions } from "@/utils/graphqlFetch";
 
-export const FormInput = () => {
+export const FormInput = ({setIsSuccess}) => {
     const { addUser } = useContext(UserContext);
 
     // fetch user information
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // setLoading(true);
         const formData = new FormData(e.target);
-
+        
         // profile information
         const info = await getProfileInformation(formData.get("username"));
         // create user ==> use the login instead of name
         if (info) {
+            setIsSuccess(true);
             const user = new UserMetrics(info.login);
             if (user) {
                 user.globalData = info;

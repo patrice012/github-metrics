@@ -54,7 +54,6 @@ export const UserRespositories = ({ userData }) => {
 // fetch user repositories
 async function getUserRespositories(user) {
     const repositoriesUrl = `${baseUrl}/users/${user}/repos`;
-    console.log(repositoriesUrl, "url");
     try {
         const res = await fetchData(repositoriesUrl);
         return res;
