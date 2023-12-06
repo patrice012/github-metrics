@@ -10,13 +10,6 @@ import { ContributionsChartForDay } from "../charts/contributionsPerDay";
 import { ContributionsChartForYear } from "../charts/contributionsPerYear";
 
 export function MetricsChart({ user }) {
-    // console.log(user.repositoryMetrics, "repositoryMetrics");
-    // console.log(user.allCommits, "allCommits");
-    // console.log(user.totalNumberOfCommits, "totalNumberOfCommits");
-
-    // console.log(user.contributionsPerWeek, "contributionsPerWeek");
-    // console.log(user.contributionsPerMonths, "contributionsPerMonths");
-    // console.log(user.contributionsPerYear, "contributionsPerYear");
 
     return (
         <>

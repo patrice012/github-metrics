@@ -37,7 +37,7 @@ export const UserRespositories = ({ userData }) => {
         <>
             <section className="listOfRespositories">
                 <div className="container">
-                    {repositories?.map((repos, index) => (
+                    {repositories?.slice(0, 8).map((repos, index) => (
                         <Respository
                             key={index}
                             repos={repos}
