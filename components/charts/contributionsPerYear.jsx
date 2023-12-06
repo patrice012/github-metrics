@@ -15,6 +15,7 @@ const colors = [
 
 export const ContributionsChartForYear = ({ user }) => {
   const _data = user.contributionsPerYear;
+  console.log(_data, 'year');
   const data = []
   for (const [key, value] of Object.entries(_data)) {
     data.push({name:key, value:value})

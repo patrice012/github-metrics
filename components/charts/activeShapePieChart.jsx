@@ -81,6 +81,7 @@ export function ActiveShapePieChart({ data }) {
     const onPieEnter = (_, index) => {
         setActiveIndex(index);
     };
+    console.log('inside pis')
 
     return (
         <ResponsiveContainer width="100%" height="100%">
