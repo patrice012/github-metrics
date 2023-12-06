@@ -1,0 +1,24 @@
+.metrics {
+    margin-block: clamp(3rem, 4.2rem + 2vw, 8rem);
+    &:last-of-type {
+        margin-block: clamp(4rem, 7rem + 7vw, 11rem);
+    }
+
+    & .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: clamp(5rem, 4rem + 6vw, 12rem);
+    }
+
+    &--container {
+        display: flex;
+    }
+
+    & .title {
+        text-align: center;
+        margin-block: clamp(1rem, 0.8rem + 1.5vw, 3rem);
+        font-size: clamp(1.1rem, 0.7rem + 1vw, 1.4rem);
+        font-weight: bold;
+    }
+}
