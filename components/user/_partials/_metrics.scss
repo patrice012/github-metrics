@@ -3,6 +3,9 @@
     &:last-of-type {
         padding-block: clamp(4rem, 7rem + 7vw, 11rem);
     }
+    &:first-of-type{
+        padding-block-start: 0;
+    }
 
     & .wrapper {
         display: flex;

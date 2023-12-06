@@ -1,4 +1,14 @@
 .listOfRespositories {
+    padding-block-start: clamp(1rem, .5rem + 1vw, 3rem);
+    padding-block-end: clamp(3rem, 2.5rem + 2vw, 5rem);
+
+    & .title {
+        text-align: center;
+        margin-block: clamp(1rem, 0.8rem + 1.5vw, 3rem);
+        font-size: clamp(1.1rem, 0.7rem + 1vw, 1.4rem);
+        font-weight: bold;
+    }
+
     & > .container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

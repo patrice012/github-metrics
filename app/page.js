@@ -6,6 +6,7 @@ import { UserContext } from "@/context/userContext";
 import { UserRespositories } from "@/components/user/UserRepository";
 import { AccountDetail } from "@/components/user/AccountDetail";
 import { Calendar } from "@/components/user/calendar";
+import { MetricsChart } from "@/components/user/metrics";
 
 export default function Home() {
     const { user } = useContext(UserContext);

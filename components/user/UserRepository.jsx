@@ -7,7 +7,6 @@ import { UserContext } from "@/context/userContext";
 import { useContext } from "react";
 import { MetricsChart } from "./metrics";
 
-
 export const UserRespositories = ({ userData }) => {
     const [repositories, setRepositories] = useState([]);
     const [contributions, setContributions] = useState({});
@@ -20,7 +19,7 @@ export const UserRespositories = ({ userData }) => {
         (async () => {
             const repos = await getUserRespositories(userData.login);
             setRepositories(repos);
-            setContributions({})
+            setContributions({});
         })();
     }, [userData]);
 
@@ -31,13 +30,15 @@ export const UserRespositories = ({ userData }) => {
     if (repositories) {
         user.setAllRespositories(repositories);
     }
-   user.allCommits;
+    user.allCommits;
 
     return (
         <>
+            <MetricsChart user={user} />
             <section className="listOfRespositories">
+                    <h3 className="title">Random repositories</h3>
                 <div className="container">
-                    {repositories?.slice(0, 8).map((repos, index) => (
+                    {repositories?.slice(0, 4).map((repos, index) => (
                         <Respository
                             key={index}
                             repos={repos}
@@ -46,9 +47,6 @@ export const UserRespositories = ({ userData }) => {
                     ))}
                 </div>
             </section>
-            {/* {user.totalNumberOfCommits && <MetricsChart user={user} />} */}
-
-            <MetricsChart user={user} />
         </>
     );
 };

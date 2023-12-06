@@ -1,0 +1,14 @@
+.calendar {
+  padding-block: clamp(3rem, 4.2rem + 2vw, 8rem);
+    & .title {
+        text-align: center;
+        margin-block: clamp(1rem, 0.8rem + 1.5vw, 3rem);
+        font-size: clamp(1.1rem, 0.7rem + 1vw, 1.4rem);
+        font-weight: bold;
+    }
+
+    & article{
+      margin-inline: auto;
+      font-size: clamp(.9375rem, .8125rem + 1.2vw, 1.125rem) !important;
+    }
+}
