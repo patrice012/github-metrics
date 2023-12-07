@@ -12,19 +12,12 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
-const colors = [
-    "#8884d8",
-    "#83a6ed",
-    "#3DED97",
-    "#3AC7EB",
-    "#0088FE",
-    "#00C49F",
-    "#8dd1e1",
-    "#82ca9d",
-];
+import { customisedStyle } from "./customStyle";
+
+const colors = customisedStyle.colors;
+const tooltipStyle = customisedStyle.tooltip;
 
 export function CommitsInRepository({ user }) {
-
     const maxNumber = 8;
     // get repository with most commits
     const data = [...user.allCommits]
@@ -57,11 +50,11 @@ export function CommitsInRepository({ user }) {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip />
-                    <Legend />
+                    <Tooltip cursor={tooltipStyle} />
+                    {/* <Legend /> */}
                     <Bar
                         dataKey="value"
-                        fill="#8884d8"
+                        fill={colors[0]}
                         activeBar={<Rectangle />}
                     />
                 </BarChart>

@@ -11,17 +11,11 @@ import {
     CartesianGrid,
     ResponsiveContainer,
 } from "recharts";
+import style from "./_style.scss";
 
-const colors = [
-    "#8884d8",
-    "#83a6ed",
-    "#3DED97",
-    "#3AC7EB",
-    "#0088FE",
-    "#00C49F",
-    "#8dd1e1",
-    "#82ca9d",
-];
+import { customisedStyle } from "./customStyle";
+
+const colors = customisedStyle.colors;
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -56,16 +50,18 @@ const monthNames = [
     "December",
 ];
 
+const tooltipStyle = customisedStyle.tooltip;
+
 export function ContributionsChartForMonth({ user }) {
     const contributions = user.contributionsPerMonths;
     const data = [];
     for (const [key, value] of Object.entries(contributions)) {
-      const month = new Date(key + "-5").getMonth();
+        const month = new Date(key + "-5").getMonth();
         const _data = {
             name: monthNames[month],
             value: value,
         };
-      data.push(_data);
+        data.push(_data);
     }
 
     return (
@@ -85,12 +81,15 @@ export function ContributionsChartForMonth({ user }) {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend />
+                    <Tooltip
+                        content={<CustomTooltip />}
+                        cursor={tooltipStyle}
+                    />
+                    {/* <Legend /> */}
 
                     <Bar
                         dataKey="value"
-                        fill="#8884d8"
+                        fill={colors[0]}
                         // shape={<TriangleBar />}
                         label={{ position: "top" }}
                     >

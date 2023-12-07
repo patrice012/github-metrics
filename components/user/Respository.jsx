@@ -36,9 +36,11 @@ export const Respository = ({ repos, setContributions }) => {
                     <h4 className="repository--watcher-count">
                         Watcher count: {repos.watchers_count}
                     </h4>
-                    <h4 className="repository--language">
-                        Language: {repos.language}
-                    </h4>
+                    {repos.language && (
+                        <h4 className="repository--language">
+                            Language: {repos.language}
+                        </h4>
+                    )}
                 </div>
                 <div>
                     {repos?.topics?.map((topic, index) => (

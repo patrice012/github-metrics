@@ -12,6 +12,11 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+import { customisedStyle } from "./customStyle";
+
+const colors = customisedStyle.colors;
+const tooltipStyle = customisedStyle.tooltip;
+
 export function BarChartPlot({ user }) {
     const commistInRepos = user.repositoryMetrics;
     const filterData = [];
@@ -52,12 +57,16 @@ export function BarChartPlot({ user }) {
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip cursor={tooltipStyle} />
                 <Legend />
-                <Bar dataKey="user" fill="#8884d8" activeBar={<Rectangle />} />
+                <Bar
+                    dataKey="user"
+                    fill={colors[0]}
+                    activeBar={<Rectangle />}
+                />
                 <Bar
                     dataKey="others"
-                    fill="#82ca9d"
+                    fill={colors[7]}
                     activeBar={<Rectangle />}
                 />
             </BarChart>

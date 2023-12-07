@@ -11,6 +11,10 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+import { customisedStyle } from "./customStyle";
+
+const colors = customisedStyle.colors;
+
 const daysName = [
     "Monday",
     "Tuesday",
@@ -73,14 +77,14 @@ export function ContributionsChartForDay({ user }) {
                 <XAxis dataKey="name" hide={true} />
                 <YAxis hide={true} />
                 <Tooltip />
-                <Legend />
+                {/* <Legend /> */}
                 <Line
                     type="monotone"
                     dataKey="value"
-                    stroke="#8884d8"
+                    stroke={colors[0]}
                     activeDot={{ r: 8 }}
                 />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
             </LineChart>
         </ResponsiveContainer>
     );

@@ -11,17 +11,12 @@ import {
     CartesianGrid,
     ResponsiveContainer,
 } from "recharts";
+import style from './_style.scss'
 
-const colors = [
-    "#8884d8",
-    "#83a6ed",
-    "#3DED97",
-    "#3AC7EB",
-    "#0088FE",
-    "#00C49F",
-    "#8dd1e1",
-    "#82ca9d",
-];
+import { customisedStyle } from "./customStyle";
+const tooltipStyle = customisedStyle.tooltip;
+
+const colors = customisedStyle.colors;
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -69,12 +64,15 @@ export function RepositoryContributions({ user }) {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Legend />
+                    <Tooltip
+                        content={<CustomTooltip />}
+                        cursor={tooltipStyle}
+                    />
+                    {/* <Legend /> */}
 
                     <Bar
                         dataKey="value"
-                        fill="#8884d8"
+                        fill={colors[0]}
                         // shape={<TriangleBar />}
                         label={{ position: "top" }}
                     >

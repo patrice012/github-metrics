@@ -11,17 +11,9 @@ import {
     ResponsiveContainer,
 } from "recharts";
 
+import { customisedStyle } from "./customStyle";
 
-const colors = [
-    "#8884d8",
-    "#83a6ed",
-    "#3DED97",
-    "#3AC7EB",
-    "#0088FE",
-    "#00C49F",
-    "#8dd1e1",
-    "#82ca9d",
-];
+const colors = customisedStyle.colors;
 
 export const ProgrammingLanguageChart = ({ user }) => {
     const langData = user.programmingLanguages;
@@ -57,7 +49,7 @@ export const ProgrammingLanguageChart = ({ user }) => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Legend />
+                    {/* <Legend /> */}
                     <Line
                         type="monotone"
                         dataKey="value"
