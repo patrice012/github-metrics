@@ -1,17 +1,18 @@
 const JWT = process.env.NEXT_PUBLIC_API_KEY;
 export async function fetchData(url) {
     try {
-        const res = await fetch(url, {
+        const response = await fetch(url, {
             headers: {
                 Authorization: `bearer ${JWT}`,
             },
         });
-        if (!res.ok) {
-            throw new Error("Failed to fetch data.");
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
-        return await res.json();
+        const data = await response.json();
+        return data
     } catch (error) {
-        // handle error
-        console.log(error);
+        // console.error("Error fetching user data:", error);
+        throw error;
     }
 }
