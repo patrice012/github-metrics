@@ -1,0 +1,17 @@
+.search--container {
+    position: relative;
+
+    & .submit {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}
+
+.modal-box {
+    & .close--btn {
+        display: flex;
+        margin-top: 1.5rem;
+        justify-content: center;
+    }
+}

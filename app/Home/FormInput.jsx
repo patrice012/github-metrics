@@ -1,40 +1,17 @@
 "use client";
 
 import { useContext } from "react";
-import { baseUrl } from "../../utils/api-endpoint";
 import { UserContext } from "@/context/userContext";
-import { fetchData } from "@/utils/fetch";
-import { UserMetrics } from "@/helpers/userGlobalMetrics";
-import { getContributions } from "@/utils/graphqlFetch";
+import { submitHelper } from "@/utils/submitHelper";
 
-export const FormInput = ({setIsSuccess}) => {
+export const FormInput = () => {
     const { addUser } = useContext(UserContext);
 
-    // fetch user information
+    const handler = submitHelper(addUser);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        
-        // profile information
-        const info = await getProfileInformation(formData.get("username"));
-        // create user ==> use the login instead of name
-        if (info) {
-            setIsSuccess(true);
-            const user = new UserMetrics(info.login);
-            if (user) {
-                user.globalData = info;
-                addUser(user);
-            }
-
-            // get user contributions
-            const contributions = await getContributions(info.login);
-            user.saveGitHubContributions(contributions);
-        }
-
-        //reset input state
-        if (info) {
-            e.target.reset();
-        }
+        await handler(e);
     };
 
     return (
@@ -49,14 +26,3 @@ export const FormInput = ({setIsSuccess}) => {
         </form>
     );
 };
-
-// fetc user information
-async function getProfileInformation(user) {
-    const url = `${baseUrl}/users/${user}`;
-    try {
-        const res = await fetchData(url);
-        return res;
-    } catch (error) {
-        return console.log(error);
-    }
-}
