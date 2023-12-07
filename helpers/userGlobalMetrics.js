@@ -1,6 +1,6 @@
 class UserMetrics {
     constructor(name) {
-        this._name = name;
+        this.name = name;
     }
 
     get name() {
@@ -8,9 +8,11 @@ class UserMetrics {
     }
 
     set name(value) {
-        if (value.length < 1) {
-            throw new Error("value must be set.");
-        } else if (typeof value != String) {
+        if (!value) {
+            // throw new Error("value must be set.");
+            this._name = "Error";
+            return;
+        } else if (typeof value != typeof "string") {
             throw new Error("Name must be a string.");
         }
         this._name = value;
@@ -60,6 +62,7 @@ class UserMetrics {
     // set user needed information
     _globalData = {};
     _initialData = {};
+
     #setImportantFields = (key, value) => {
         this._globalData[key] = value;
     };
@@ -90,21 +93,29 @@ class UserMetrics {
     }
 
     // set global error
-    _globalError = { message: undefined };
+    _globalError = { };
 
     /**
      * @param {string} error
      */
     set globalError(error) {
         if (!error) return;
-        this._globalError = error;
+        if (typeof error != typeof {}) {
+            throw new Error('Error must be an Object');
+        }
+        let key = Object.keys(error)[0];
+        let value = Object.values(error)[0];
+        this._globalError[[key]] = value;
     }
 
     get globalError() {
-        if (this._globalError.message) {
+        if (this._name === "Error") {
+            return { error: "Name error" };
+        }
+        if (this._globalError) {
             return this._globalError;
         } else {
-            return "Not error found.";
+            return "No error.";
         }
     }
 
@@ -207,6 +218,8 @@ class UserMetrics {
     }
 
     #filterRespositoryInformation(data) {
+        // reset this fields and save new data when username changed
+        this.#listOfLanguages = {};
         const filterData = data?.map((repos, _) => {
             // get all programing language
             if (repos.language) {
@@ -270,16 +283,16 @@ class UserMetrics {
 
     get contributionsPerMonths() {
         const dataPerWeek = this.contributionsPerWeek;
-        const data = {}
+        const data = {};
         for (let [key, value] of Object.entries(dataPerWeek)) {
             const month = key.split("-").slice(0, 2).join("-");
             if (Object.keys(data).includes(month)) {
-                data[month] += value
+                data[month] += value;
             } else {
                 data[month] = value;
             }
         }
-        return data
+        return data;
     }
 
     get contributionsPerWeek() {
@@ -313,3 +326,14 @@ class UserMetrics {
 }
 
 export { UserMetrics };
+
+// const user = new UserMetrics();
+// user.globalError = {t:'test'};
+// user.globalError = {r:'test'};
+// user.globalError = {f:'test'};
+// user.globalError = { y: "test" };
+
+
+// user.new = 'field'
+
+// console.log(user);
