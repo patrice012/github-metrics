@@ -10,22 +10,42 @@ import { InputComponent } from "./Home/InputComponent";
 export default function Home() {
     const { user } = useContext(UserContext);
     const userData = user?.globalData;
-    console.log(user, 'user')
-    console.log(user?.globalError, "user globalError");
-    console.log(user?.requestState, "user requestState");
+    const globalError = user?.globalError;
+    const requestState = user?.requestState;
+    let notFoundError = undefined;
+    let authorizationError = undefined;
+    let nameError = undefined;
+    if (globalError) {
+        for (let [key, value] of Object.entries(globalError)) {
+            console.log(typeof key, value);
+            if (key === "404") {
+                notFoundError = globalError?.value;
+            }
+            if (key === "401") {
+                authorizationError = globalError?.value;
+            }
+            if (key === "error") {
+                nameError = value;
+            }
+        }
+    }
 
     return (
         <>
-            <InputComponent user={user} /> 
-            {user?.requestState === "success" && (
-                <AccountDetail userData={userData} />
-            )}
-            {user?.requestState === "success" && (
-                <Calendar userData={user.globalData} />
-            )}
-            {user?.requestState === "success" && (
-                <UserRespositories userData={userData} />
-            )}
+            <div className="container">
+                <InputComponent user={user} />
+                {requestState === "success" ? (
+                    <>
+                        <AccountDetail userData={userData} />
+                        <Calendar userData={user.globalData} />
+                        <UserRespositories userData={userData} />
+                    </>
+                ) : notFoundError || nameError ? (
+                    <p>404 User not found</p>
+                ) : authorizationError ? (
+                    <p>{authorizationError}</p>
+                ) : null}
+            </div>
         </>
     );
 }

@@ -93,7 +93,7 @@ class UserMetrics {
     }
 
     // set global error
-    _globalError = { };
+    _globalError = {};
 
     /**
      * @param {string} error
@@ -101,7 +101,7 @@ class UserMetrics {
     set globalError(error) {
         if (!error) return;
         if (typeof error != typeof {}) {
-            throw new Error('Error must be an Object');
+            throw new Error("Error must be an Object");
         }
         let key = Object.keys(error)[0];
         let value = Object.values(error)[0];
@@ -121,7 +121,7 @@ class UserMetrics {
 
     // author commits
     #commitPerRepository = [];
-    #totalNumberOfCommits = 0;
+    _totalNumberOfCommits = 0;
     #allContributions = [];
     #commitsRepos = [];
     #allRepositories = [];
@@ -140,12 +140,12 @@ class UserMetrics {
 
     #getTotalNumberOfCommits() {
         const initialValue = 0;
-        this.#totalNumberOfCommits = this.#commitPerRepository.reduce(
+        this._totalNumberOfCommits = this.#commitPerRepository.reduce(
             (accumulator, obj) => accumulator + Object.values(obj)[0],
             initialValue
         );
 
-        return this.#totalNumberOfCommits;
+        return this._totalNumberOfCommits;
     }
 
     get totalNumberOfCommits() {
@@ -193,21 +193,20 @@ class UserMetrics {
         this.#filterCommitsBaseOnUserName(this.#allContributions);
         return this.#commitPerRepository;
     }
-
     get allCommits() {
         return this.#getAllCommits();
     }
 
     #resetValues() {
         this.#commitPerRepository = [];
-        this.#totalNumberOfCommits = 0;
+        this._totalNumberOfCommits = 0;
         this.#allContributions = [];
         this.#commitsRepos = [];
         this.#allRepositories = [];
     }
 
     // repos information (user, name, language, numberOfCommits, numberOfCollaborator, createAt)
-    #listOfLanguages = {};
+    _programmingLanguages = {};
 
     setAllRespositories(data) {
         this.#allRepositories = [...data];
@@ -219,16 +218,18 @@ class UserMetrics {
 
     #filterRespositoryInformation(data) {
         // reset this fields and save new data when username changed
-        this.#listOfLanguages = {};
+        this._programmingLanguages = {};
         const filterData = data?.map((repos, _) => {
             // get all programing language
             if (repos.language) {
                 if (
-                    Object.keys(this.#listOfLanguages).includes(repos?.language)
+                    Object.keys(this._programmingLanguages).includes(
+                        repos?.language
+                    )
                 ) {
-                    this.#listOfLanguages[repos?.language] += 1;
+                    this._programmingLanguages[repos?.language] += 1;
                 } else {
-                    this.#listOfLanguages[repos?.language] = 1;
+                    this._programmingLanguages[repos?.language] = 1;
                 }
             }
             return {
@@ -243,7 +244,7 @@ class UserMetrics {
 
     get programmingLanguages() {
         this.#filterRespositoryInformation(this.#allRepositories);
-        return this.#listOfLanguages;
+        return this._programmingLanguages;
     }
 
     // user contributions
@@ -267,6 +268,7 @@ class UserMetrics {
             this.#githubContributions.pullRequestReviewContributions;
     }
 
+    _contributionsPerYear = {};
     get contributionsPerYear() {
         const dataPerWeek = this.contributionsPerMonths;
         const data = {};
@@ -278,9 +280,11 @@ class UserMetrics {
                 data[month] = value;
             }
         }
-        return data;
+        this._contributionsPerYear = data;
+        return this._contributionsPerYear;
     }
 
+    _contributionsPerMonths = {};
     get contributionsPerMonths() {
         const dataPerWeek = this.contributionsPerWeek;
         const data = {};
@@ -292,9 +296,11 @@ class UserMetrics {
                 data[month] = value;
             }
         }
-        return data;
+        this._contributionsPerMonths = data;
+        return this._contributionsPerMonths;
     }
 
+    _contributionsPerWeek = {};
     get contributionsPerWeek() {
         const data = {};
         this.#userContributionCalendar?.map((contrib, _) => {
@@ -305,35 +311,31 @@ class UserMetrics {
             );
             data[contrib.firstDay] = count;
         });
-
-        return data;
+        this._contributionsPerWeek = data;
+        return this._contributionsPerWeek;
     }
 
     // contributions types
+    _numberOfIssues = 0;
     get numberOfIssues() {
-        return this.#numberOfIssues.totalCount;
+        this._numberOfIssues = this.#numberOfIssues.totalCount;
+        return this._numberOfIssues;
     }
+    _numberOfPullRequest = 0;
     get numberOfPullRequest() {
-        return this.#numberOfPullRequest.totalCount;
+        this._numberOfPullRequest = this.#numberOfPullRequest.totalCount;
+        return this._numberOfPullRequest;
     }
+    _numberOfReviews = 0;
     get numberOfReviews() {
-        return this.#numberOfReviews.totalCount;
+        this._numberOfReviews = this.#numberOfReviews.totalCount;
+        return this._numberOfReviews;
     }
-
+    _repositoriesContributions = [];
     get repositoriesContributions() {
-        return this.#repositoriesContributions;
+        this._repositoriesContributions = this.#repositoriesContributions;
+        return this._repositoriesContributions;
     }
 }
 
 export { UserMetrics };
-
-// const user = new UserMetrics();
-// user.globalError = {t:'test'};
-// user.globalError = {r:'test'};
-// user.globalError = {f:'test'};
-// user.globalError = { y: "test" };
-
-
-// user.new = 'field'
-
-// console.log(user);
