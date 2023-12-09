@@ -85,8 +85,9 @@ header.landing-page--header {
         color: var(--white-color, #fff);
 
         text-align: center;
-        // @include g.for-tablet-portrait-up {
-        // }
+        @include g.for-desktop-up{
+            width: 80%;
+        }
 
         #slider-text {
             font-size: 88%;
