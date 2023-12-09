@@ -1,0 +1,14 @@
+import style from './_loading.scss'
+
+export const Loading = () => {
+  return (
+      <>
+          <div className="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+      </>
+  );
+}

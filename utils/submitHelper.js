@@ -3,7 +3,7 @@ import { getContributions } from "@/utils/graphqlFetch";
 import { getProfileInformation } from "@/utils/getProfile";
 
 export function submitHelper(addUser) {
-    return async (e, callback = (f) => f) => {
+    return async (e, callback = (f) => f, stateHandler = (f) => f) => {
         const formData = new FormData(e.target);
 
         // create default user
@@ -34,6 +34,7 @@ export function submitHelper(addUser) {
             addUser(errorUser);
         } finally {
             callback((prev) => !prev);
+            stateHandler((prev) => !prev);
         }
     };
 }

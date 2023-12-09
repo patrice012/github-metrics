@@ -1,6 +1,7 @@
 "use client";
 
 import { InputModal } from "@/app/Home/InputModal";
+import Link from "next/link";
 import { useState } from "react";
 
 export const Navbar = () => {
@@ -10,7 +11,7 @@ export const Navbar = () => {
             <div className="navbar bg-base-100">
                 <div className="container">
                     <div className="flex-1">
-                        <a className="btn btn-ghost text-xl">Github Metrics</a>
+                        <Link href='/' className="btn btn-ghost text-xl">Github Metrics</Link>
                     </div>
                     <div className="flex-none">
                         <button onClick={() => setShowModal(prev => !prev)} className="btn btn-square btn-ghost">
