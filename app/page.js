@@ -5,7 +5,7 @@ import { UserContext } from "@/context/userContext";
 import { UserRespositories } from "@/components/user/UserRepository";
 import { AccountDetail } from "@/components/user/AccountDetail";
 import { Calendar } from "@/components/user/calendar";
-import { InputComponent } from "./Home/InputComponent";
+import HeaderIntereface from "./demo/HeaderIntereface";
 
 export default function Home() {
     const { user } = useContext(UserContext);
@@ -17,7 +17,6 @@ export default function Home() {
     let nameError = undefined;
     if (globalError) {
         for (let [key, value] of Object.entries(globalError)) {
-            console.log(typeof key, value);
             if (key === "404") {
                 notFoundError = globalError?.value;
             }
@@ -32,8 +31,8 @@ export default function Home() {
 
     return (
         <>
+            <HeaderIntereface user={ user} />
             <div className="container">
-                <InputComponent user={user} />
                 {requestState === "success" ? (
                     <>
                         <AccountDetail userData={userData} />
